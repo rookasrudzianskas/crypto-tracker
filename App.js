@@ -29,7 +29,7 @@ export default function App() {
             </View>
             <View>
                 <Text className="text-xl font-bold text-white">56.998.33</Text>
-                <Text className="font-bold uppercase text-gray-400/90 text-[15px] mt-1">MCap 1,079 T</Text>
+                <Text className="font-bold text-gray-400/90 text-[15px] mt-1">MCap 1,079 T</Text>
             </View>
         </TouchableOpacity>
         <StatusBar style="light" />
