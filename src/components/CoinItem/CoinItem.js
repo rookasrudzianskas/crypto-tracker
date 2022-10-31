@@ -15,8 +15,8 @@ const CoinItem = ({item, index}) => {
                         <View className="w-5 h-5 bg-gray-600 rounded-md items-center justify-center mr-2 mt-1">
                             <Text className="text-white font-bold">{index}</Text>
                         </View>
-                        <Text className="font-bold uppercase text-gray-400/90 mr-2 tracking-wider">{item?.symbol || 'Loading...'}</Text>
-                        <View className="flex-row items-center space-x-2">
+                        <Text className="font-bold uppercase text-gray-400/90 mr-2 tracking-wider mt-1">{item?.symbol || 'Loading...'}</Text>
+                        <View className="flex-row items-center space-x-2 mt-1">
                             {item?.price_change_percentage_24h > 0  ? (
                                 <FontAwesome name="caret-up" size={20} color="#3DFF4F" />
                             ) : (
