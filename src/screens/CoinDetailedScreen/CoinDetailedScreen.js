@@ -7,6 +7,7 @@ import CoinDetailedHeader from "./components/CoinDetailedHeader";
 import CoinDetailFooter from "./components/CoinDetailFooter";
 import {Dimensions} from 'react-native';
 import {ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from '@rainbow-me/animated-charts';
+import 'react-native-gesture-handler';
 
 const CoinDetailedScreen = () => {
     const screenWidth = Dimensions.get('window').width;
@@ -55,13 +56,13 @@ const CoinDetailedScreen = () => {
                     <ChartYLabel format={formatCurrency} style={styles.currentPrice} />
                 </View>
                 {/*<CoinDetailFooter />*/}
+                <ChartPath
+                    strokeWidth={2}
+                    height={screenWidth / 2}
+                    stroke={chartColor}
+                    width={screenWidth}
+                />
                 <View>
-                    <ChartPath
-                        strokeWidth={2}
-                        height={screenWidth / 2}
-                        stroke={chartColor}
-                        width={screenWidth}
-                    />
                     <ChartDot style={{ backgroundColor: chartColor }} />
                 </View>
                 </ChartPathProvider>
