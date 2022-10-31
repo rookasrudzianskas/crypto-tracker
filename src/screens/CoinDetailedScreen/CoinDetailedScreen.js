@@ -25,7 +25,6 @@ const CoinDetailedScreen = () => {
             }
         }
     } = cryptoCurrencyData;
-    const [usdPrice, setUsdPrice] = useState(usd);
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
     const [coinValue, setCoinValue] = useState('1');
     const [usdValue, setUsdValue] = useState(usd.toString());
@@ -91,7 +90,6 @@ const CoinDetailedScreen = () => {
                     usd={usd}
                 />
 
-                {/*<CoinDetailFooter />*/}
                 <ChartPath
                     strokeWidth={2}
                     height={screenWidth / 2}
@@ -112,6 +110,8 @@ const CoinDetailedScreen = () => {
                         <TextInput keyboardType={'numeric'}  value={usdValue} onChangeText={changeUsdValue} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
                     </View>
                 </View>
+
+                {/*<CoinDetailFooter /> @FIXME do the footer */}
 
                 </ChartPathProvider>
         </View>
