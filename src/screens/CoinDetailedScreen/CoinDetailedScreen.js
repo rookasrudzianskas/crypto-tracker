@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Image, TextInput} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image, TextInput, ActivityIndicator} from 'react-native';
 import cryptoCurrencyData from "../../../assets/data/crypto.json";
 import {FontAwesome, Ionicons} from "@expo/vector-icons";
 import CoinDetailedHeader from "./components/CoinDetailedHeader";
@@ -27,6 +27,7 @@ const CoinDetailedScreen = () => {
             }
         }
     } = cryptoCurrencyData;
+
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
     const [coinValue, setCoinValue] = useState('1');
     const [usdValue, setUsdValue] = useState(usd.toString());
@@ -47,7 +48,15 @@ const CoinDetailedScreen = () => {
         })();
     }, []);
 
-    const formatCurrency = (value) => {
+    if (loading || !coin) {
+        return (
+            <View className="h-screen items-center justify-center">
+                <ActivityIndicator />
+            </View>
+        )
+    }
+
+        const formatCurrency = (value) => {
         "worklet";
         if (value === "") {
             return `$${usd.toFixed(2)}`;
