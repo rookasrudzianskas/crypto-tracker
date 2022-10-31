@@ -47,6 +47,8 @@ const CoinDetailedScreen = () => {
 
     const changeUsdValue = (value) => {
         setUsdValue(value);
+        const floatValue = parseFloat(value.replace(',', '.')) || 0;
+        setCoinValue((floatValue / usd).toString())
     }
 
     return (
