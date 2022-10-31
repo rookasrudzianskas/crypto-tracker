@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image, TextInput} from 'react-native';
 import cryptoCurrencyData from "../../../assets/data/crypto.json";
 import {FontAwesome, Ionicons} from "@expo/vector-icons";
 import CoinDetailedHeader from "./components/CoinDetailedHeader";
@@ -65,6 +65,18 @@ const CoinDetailedScreen = () => {
                 <View>
                     <ChartDot style={{ backgroundColor: chartColor }} />
                 </View>
+
+                <View>
+                    <View className="flex-row items-center justify-around">
+                        <Text className="text-white font-bold">BTC</Text>
+                        <Text className="text-white font-bold">USD</Text>
+                    </View>
+                    <View className="space-x-4 flex-row justify-around mx-4">
+                        <TextInput keyboardType={'numeric'} value={'1'} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
+                        <TextInput keyboardType={'numeric'} value={usd.toString()} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
+                    </View>
+                </View>
+
                 </ChartPathProvider>
         </View>
     );
