@@ -27,8 +27,8 @@ const CoinDetailedScreen = () => {
     } = cryptoCurrencyData;
     const [usdPrice, setUsdPrice] = useState(usd);
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
-    const [coinValue, setCoinValue] = useState(1);
-    const [usdValue, setUsdValue] = useState(usd || 0);
+    const [coinValue, setCoinValue] = useState('1');
+    const [usdValue, setUsdValue] = useState(usd.toString());
     const nf = Intl.NumberFormat();
 
     const formatCurrency = (value) => {
@@ -40,11 +40,13 @@ const CoinDetailedScreen = () => {
     }
 
     const changeCoinValue = (value) => {
-        setCoinValue(parseFloat(value) || 0);
+        setCoinValue(value);
+        const floatValue = parseFloat(value.replace(',', '.')) || 0;
+        setUsdValue((floatValue * usd).toString());
     }
 
     const changeUsdValue = (value) => {
-        setUsdPrice(parseFloat(value) || 0);
+        setUsdValue(value);
     }
 
     return (
@@ -104,8 +106,8 @@ const CoinDetailedScreen = () => {
                         <Text className="text-white font-bold">USD</Text>
                     </View>
                     <View className="space-x-4 flex-row justify-around mx-4">
-                        <TextInput keyboardType={'numeric'} value={coinValue.toString()} onChangeText={changeCoinValue} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
-                        <TextInput keyboardType={'numeric'} value={usdValue.toString()} onChangeText={changeUsdValue} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
+                        <TextInput keyboardType={'numeric'} value={coinValue} onChangeText={changeCoinValue} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
+                        <TextInput keyboardType={'numeric'}  value={usdValue} onChangeText={changeUsdValue} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
                     </View>
                 </View>
 
