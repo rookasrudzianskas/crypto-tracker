@@ -25,8 +25,8 @@ const CoinDetailedScreen = () => {
     } = cryptoCurrencyData;
 
     return (
-        <View className="pt-12 mx-4">
-            <ChartPathProvider data={{ points: prices.map((price) => ({x: price[0], y: price[1]})), smoothingStrategy: 'bezier' }}>
+        <View className="pt-12">
+            <ChartPathProvider data={{ points: prices.map(([x, y]) => ({ x, y})), smoothingStrategy: 'bezier' }}>
                 <CoinDetailedHeader
                     coinId={id}
                     image={small}

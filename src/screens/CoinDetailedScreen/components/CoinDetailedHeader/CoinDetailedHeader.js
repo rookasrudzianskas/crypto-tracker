@@ -9,7 +9,7 @@ const CoinDetailedHeader = ({ coinId, name, usd, image, symbol, price_change_per
     const nf = Intl.NumberFormat();
 
     return (
-        <View>
+        <View className=" mx-4">
             <View className="flex-row items-center">
                 <View className="flex-1 flex-row items-center space-x-2">
                     <TouchableOpacity activeOpacity={0.7}>
