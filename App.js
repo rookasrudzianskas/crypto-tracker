@@ -11,7 +11,7 @@ export default function App() {
               keyExtractor={item => item.id}
               showsVerticalScrollIndicator={false}
               renderItem={({item, index}) => (
-                  <CoinItem item={item} index={index} />
+                  <CoinItem marketCoin={item} index={index} />
               )} />
         <StatusBar style="light" />
       </View>
