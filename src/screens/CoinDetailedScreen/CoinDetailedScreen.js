@@ -40,11 +40,11 @@ const CoinDetailedScreen = () => {
     }
 
     const changeCoinValue = (value) => {
-        setCoinValue(parseFloat(value));
+        setCoinValue(parseFloat(value) || 0);
     }
 
     const changeUsdValue = (value) => {
-        setUsdPrice(parseFloat(value));
+        setUsdPrice(parseFloat(value) || 0);
     }
 
     return (
@@ -87,9 +87,6 @@ const CoinDetailedScreen = () => {
                     usd={usd}
                 />
 
-                <View className="">
-
-                </View>
                 {/*<CoinDetailFooter />*/}
                 <ChartPath
                     strokeWidth={2}
