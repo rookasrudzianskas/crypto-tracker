@@ -24,6 +24,7 @@ const CoinDetailedScreen = () => {
         }
     } = cryptoCurrencyData;
     const [usdPrice, setUsdPrice] = useState(usd);
+    const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
 
     const formatCurrency = (value) => {
         "worklet";
@@ -35,7 +36,12 @@ const CoinDetailedScreen = () => {
 
     return (
         <View className="pt-12">
-            <ChartPathProvider data={{ points: prices.map(([x, y]) => ({ x, y})), smoothingStrategy: 'bezier' }}>
+            <ChartPathProvider
+                data={{
+                    points: prices.map(([x, y]) => ({ x, y })),
+                    smoothingStrategy: "bezier",
+                }}
+            >
                 <CoinDetailedHeader
                     coinId={id}
                     image={small}
@@ -45,11 +51,18 @@ const CoinDetailedScreen = () => {
                     price_change_percentage_24h={price_change_percentage_24h}
                     usd={usd}
                 />
-                <ChartYLabel format={formatCurrency} style={styles.currentPrice} />
+                <View className="">
+                    <ChartYLabel format={formatCurrency} style={styles.currentPrice} />
+                </View>
                 {/*<CoinDetailFooter />*/}
-                <View style={{}}>
-                    <ChartPath height={screenWidth / 2} stroke="yellow" width={screenWidth} />
-                    <ChartDot style={{ backgroundColor: 'blue' }} />
+                <View>
+                    <ChartPath
+                        strokeWidth={2}
+                        height={screenWidth / 2}
+                        stroke={chartColor}
+                        width={screenWidth}
+                    />
+                    <ChartDot style={{ backgroundColor: chartColor }} />
                 </View>
                 </ChartPathProvider>
         </View>
