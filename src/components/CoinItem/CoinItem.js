@@ -2,6 +2,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
+import {useNavigation} from "@react-navigation/native";
 
 const CoinItem = ({marketCoin, index}) => {
     const {
@@ -15,6 +16,7 @@ const CoinItem = ({marketCoin, index}) => {
         image,
     } = marketCoin;
     const nf = Intl.NumberFormat();
+    const navigation = useNavigation();
 
     const normalizeMarketCap = (marketCap) => {
         if (marketCap >= 1000000000) {
@@ -27,7 +29,7 @@ const CoinItem = ({marketCoin, index}) => {
     }
 
     return (
-        <TouchableOpacity className="flex-row items-center justify-between mx-4 my-2" activeOpacity={0.7}>
+        <TouchableOpacity onPress={() => navigation.navigate('CoinDetailedScreen')} className="flex-row items-center justify-between mx-4 my-2" activeOpacity={0.7}>
             <View className="flex-row items-center">
                 <Image source={{ uri: image || 'https://as2.ftcdn.net/v2/jpg/02/88/85/71/1000_F_288857162_l7ZOOsEveQf1d8PMsNC6HMQFeqafLJhx.jpg'}} className="w-10 h-10 object-contain" />
                 <View className="items-start ml-3 w-[200px] ">
