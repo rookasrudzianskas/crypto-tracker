@@ -26,6 +26,8 @@ const CoinDetailedScreen = () => {
     } = cryptoCurrencyData;
     const [usdPrice, setUsdPrice] = useState(usd);
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
+    const [coinValue, setCoinValue] = useState(1);
+    const [usdValue, setUsdValue] = useState(usd || 0);
 
     const formatCurrency = (value) => {
         "worklet";
@@ -33,6 +35,14 @@ const CoinDetailedScreen = () => {
             return `$${usd.toFixed(2)}`;
         }
         return `$${parseFloat(value).toFixed(2)}`;
+    }
+
+    const changeCoinValue = (value) => {
+        console.warn(value)
+    }
+
+    const changeUsdValue = (value) => {
+        console.warn(value)
     }
 
     return (
@@ -66,14 +76,14 @@ const CoinDetailedScreen = () => {
                     <ChartDot style={{ backgroundColor: chartColor }} />
                 </View>
 
-                <View>
+                <View className="bg-gray-800 py-4 mx-4 rounded-lg">
                     <View className="flex-row items-center justify-around">
                         <Text className="text-white font-bold">BTC</Text>
                         <Text className="text-white font-bold">USD</Text>
                     </View>
                     <View className="space-x-4 flex-row justify-around mx-4">
-                        <TextInput keyboardType={'numeric'} value={'1'} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
-                        <TextInput keyboardType={'numeric'} value={usd.toString()} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
+                        <TextInput keyboardType={'numeric'} value={coinValue.toString()} onChangeText={changeCoinValue} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
+                        <TextInput keyboardType={'numeric'} value={usdValue.toString()} onChangeText={changeUsdValue} placeholder={'Enter Amount'} className="bg-gray-700/80 rounded py-2 px-5 flex-1 text-white mt-2"/>
                     </View>
                 </View>
 
