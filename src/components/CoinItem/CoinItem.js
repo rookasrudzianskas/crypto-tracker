@@ -38,8 +38,8 @@ const CoinItem = ({marketCoin, index}) => {
                 </View>
             </View>
             <View>
-                <Text className="text-xl font-bold text-white">{nf.format(market_cap) || 0}</Text>
-                <Text className="font-bold text-gray-400/90 text-[15px] mt-1">MCap 1,079 T</Text>
+                <Text className="text-xl font-bold text-white">{current_price.toFixed(2) || 0}</Text>
+                <Text className="font-bold text-gray-400/90 text-[15px] mt-1">MCap {market_cap} T</Text>
             </View>
         </TouchableOpacity>
     );
