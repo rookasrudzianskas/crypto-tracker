@@ -5,7 +5,7 @@ import CoinDetailedScreen from "./src/screens/CoinDetailedScreen";
 
 export default function App() {
   return (
-      <View className="flex-1 pt-16 bg-[#121212]">
+      <View className="flex-1 bg-[#121212]">
           {/*<HomeScreen />*/}
           <CoinDetailedScreen />
         <StatusBar style="light" />

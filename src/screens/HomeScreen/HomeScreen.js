@@ -6,7 +6,7 @@ import CoinItem from "../../components/CoinItem";
 
 const HomeScreen = () => {
     return (
-        <View>
+        <View className=" pt-16">
             <FlatList
                 data={cryptoData}
                 keyExtractor={item => item.id}
