@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image, TextInput} from 'react-native';
 import cryptoCurrencyData from "../../../assets/data/crypto.json";
 import {FontAwesome, Ionicons} from "@expo/vector-icons";
@@ -10,6 +10,7 @@ import {ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from '@rainbow-me/a
 import 'react-native-gesture-handler';
 import CoinSelectedFeatures from "./components/CoinSelectedFeatures";
 import {useRoute} from "@react-navigation/native";
+import {getDetailedCoinData} from "../../services/requests";
 
 const CoinDetailedScreen = () => {
     const screenWidth = Dimensions.get('window').width;
@@ -29,9 +30,22 @@ const CoinDetailedScreen = () => {
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
     const [coinValue, setCoinValue] = useState('1');
     const [usdValue, setUsdValue] = useState(usd.toString());
+    const [loading, setLoading] = useState(false);
+    const [coin, setCoin] = useState(null);
     const nf = Intl.NumberFormat();
     const route = useRoute();
     const { coinId } = route.params;
+
+    useEffect(() => {
+        (async () => {
+            setLoading(true);
+            const fetchedCoinData = await getDetailedCoinData(coinId);
+            setCoin(fetchedCoinData);
+            setUsdValue(fetchedCoinData.market_data.current_price.usd.toString());
+            // console.log(fetchedCoinData);
+            setLoading(false);
+        })();
+    }, []);
 
     const formatCurrency = (value) => {
         "worklet";
