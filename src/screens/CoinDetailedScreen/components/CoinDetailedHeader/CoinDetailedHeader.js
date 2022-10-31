@@ -9,7 +9,10 @@ const CoinDetailedHeader = ({ coinId, name, usd, image, symbol, price_change_per
 
     return (
         <View>
-            <View>
+            <View className="flex-row items-center space-x-2">
+                <TouchableOpacity activeOpacity={0.7}>
+                    <Ionicons name="arrow-back-circle-outline" size={24} color="white" />
+                </TouchableOpacity>
                 <Text className="text-white text-lg font-semibold">{name || 'Loading...'}</Text>
             </View>
             <View className="flex-row items-center justify-between">
@@ -28,9 +31,9 @@ const CoinDetailedHeader = ({ coinId, name, usd, image, symbol, price_change_per
                 <Text className="text-white tracking-wider">{(market_cap_rank).toFixed(2)}</Text>
                 <Image source={{uri: image }} className="h-4 w-4" />
             </View>
-            <View className="flex-row py-1 px-2 rounded bg-gray-700/60 justify-between space-x-2 mt-5">
+            <View className="flex-row py-1 px-2 rounded-lg bg-gray-700/60 justify-between space-x-2 mt-5">
                 {times.map((time, index) => (
-                    <TouchableOpacity onPress={() => setSelectedTime(time)} className={`${selectedTime === time && ' bg-gray-900/80 rounded'} py-2 flex-1 items-center justify-center`} key={index} activeOpacity={0.7}>
+                    <TouchableOpacity onPress={() => setSelectedTime(time)} className={`${selectedTime === time && ' bg-gray-900/80 rounded-lg'} py-2 flex-1 items-center justify-center`} key={index} activeOpacity={0.7}>
                         <Text className={` ${selectedTime === time ? 'text-white' : 'text-gray-400'} font-bold`}>{time}</Text>
                     </TouchableOpacity>
                 ))}
