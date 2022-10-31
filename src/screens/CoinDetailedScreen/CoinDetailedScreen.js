@@ -5,6 +5,7 @@ import cryptoCurrencyData from "../../../assets/data/crypto.json";
 import {FontAwesome, Ionicons} from "@expo/vector-icons";
 
 const CoinDetailedScreen = () => {
+    const times =  ['1h', '24h', '7d', '30d', '1y', 'All'];
     const {image: { small },
         name,
         symbol,
@@ -37,6 +38,13 @@ const CoinDetailedScreen = () => {
                 <Ionicons name="swap-vertical-outline" size={17} color="gray" />
                 <Text className="text-white tracking-wider">{(market_cap_rank).toFixed(2)}</Text>
                 <Image source={{uri: small }} className="h-4 w-4" />
+            </View>
+            <View className="flex-row bg-gray-700/60 justify-between space-x-2">
+                {times.map((time, index) => (
+                    <TouchableOpacity className="bg-red-500 flex-1 items-center justify-center" key={index} activeOpacity={0.7}>
+                        <Text className="text-white">{time}</Text>
+                    </TouchableOpacity>
+                ))}
             </View>
         </View>
     );
