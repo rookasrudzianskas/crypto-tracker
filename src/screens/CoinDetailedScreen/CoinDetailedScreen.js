@@ -4,6 +4,7 @@ import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import cryptoCurrencyData from "../../../assets/data/crypto.json";
 import {FontAwesome, Ionicons} from "@expo/vector-icons";
 import CoinDetailedHeader from "./components/CoinDetailedHeader";
+import CoinDetailFooter from "./components/CoinDetailFooter";
 
 const CoinDetailedScreen = () => {
     const {image: { small },
@@ -30,6 +31,7 @@ const CoinDetailedScreen = () => {
                 price_change_percentage_24h={price_change_percentage_24h}
                 usd={usd}
             />
+            {/*<CoinDetailFooter />*/}
         </View>
     );
 };
