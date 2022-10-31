@@ -6,6 +6,7 @@ import {EvilIcons, FontAwesome, Ionicons} from "@expo/vector-icons";
 const CoinDetailedHeader = ({ coinId, name, usd, image, symbol, price_change_percentage_24h, market_cap_rank }) => {
     const times =  ['1h', '24h', '7d', '30d', '1y', 'All'];
     const [selectedTime, setSelectedTime] = useState(times[0]);
+    const nf = Intl.NumberFormat();
 
     return (
         <View>
@@ -21,7 +22,7 @@ const CoinDetailedHeader = ({ coinId, name, usd, image, symbol, price_change_per
                 </TouchableOpacity>
             </View>
             <View className="flex-row items-center justify-between">
-                <Text className="text-white text-2xl font-semibold tracking-wide">{(usd).toFixed(2) || 0} US$</Text>
+                <Text className="text-white text-2xl font-semibold tracking-wide">{(nf.format(usd.toFixed(2))) || 0} US$</Text>
                 <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${price_change_percentage_24h > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
                     {price_change_percentage_24h > 0 ? (
                         <FontAwesome name="caret-up" style={{marginBottom: 2}} size={20} color="white" />
