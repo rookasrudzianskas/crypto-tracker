@@ -15,6 +15,17 @@ const CoinItem = ({marketCoin, index}) => {
         image,
     } = marketCoin;
     const nf = Intl.NumberFormat();
+
+    const normalizeMarketCap = (marketCap) => {
+        if (marketCap >= 1000000000) {
+            return `${(marketCap / 1000000000).toFixed(2)}B`;
+        } else if (marketCap >= 1000000) {
+            return `${(marketCap / 1000000).toFixed(2)}M`;
+        } else {
+            return `${(marketCap / 1000).toFixed(2)}K`;
+        }
+    }
+
     return (
         <TouchableOpacity className="flex-row items-center justify-between mx-4 my-2" activeOpacity={0.7}>
             <View className="flex-row items-center">
@@ -39,7 +50,7 @@ const CoinItem = ({marketCoin, index}) => {
             </View>
             <View>
                 <Text className="text-xl font-bold text-white">{current_price.toFixed(2) || 0}</Text>
-                <Text className="font-bold text-gray-400/90 text-[15px] mt-1">MCap {market_cap} T</Text>
+                <Text className="font-bold text-gray-400/90 text-[15px] mt-1">MCap {normalizeMarketCap(market_cap)} T</Text>
             </View>
         </TouchableOpacity>
     );
