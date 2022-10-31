@@ -8,6 +8,7 @@ export default function App() {
       <View className="flex-1 pt-16 bg-[#121212]">
           <FlatList
               data={cryptoData}
+              keyExtractor={item => item.id}
               showsVerticalScrollIndicator={false}
               renderItem={({item, index}) => (
                   <CoinItem item={item} index={index} />
