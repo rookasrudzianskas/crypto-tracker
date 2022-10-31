@@ -9,6 +9,7 @@ import {Dimensions} from 'react-native';
 import {ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from '@rainbow-me/animated-charts';
 import 'react-native-gesture-handler';
 import CoinSelectedFeatures from "./components/CoinSelectedFeatures";
+import {useRoute} from "@react-navigation/native";
 
 const CoinDetailedScreen = () => {
     const screenWidth = Dimensions.get('window').width;
@@ -29,6 +30,8 @@ const CoinDetailedScreen = () => {
     const [coinValue, setCoinValue] = useState('1');
     const [usdValue, setUsdValue] = useState(usd.toString());
     const nf = Intl.NumberFormat();
+    const route = useRoute();
+    const { coinId } = route.params;
 
     const formatCurrency = (value) => {
         "worklet";
