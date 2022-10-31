@@ -8,6 +8,7 @@ import CoinDetailFooter from "./components/CoinDetailFooter";
 import {Dimensions} from 'react-native';
 import {ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from '@rainbow-me/animated-charts';
 import 'react-native-gesture-handler';
+import CoinSelectedFeatures from "./components/CoinSelectedFeatures";
 
 const CoinDetailedScreen = () => {
     const screenWidth = Dimensions.get('window').width;
@@ -28,6 +29,7 @@ const CoinDetailedScreen = () => {
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
     const [coinValue, setCoinValue] = useState(1);
     const [usdValue, setUsdValue] = useState(usd || 0);
+    const nf = Intl.NumberFormat();
 
     const formatCurrency = (value) => {
         "worklet";
@@ -62,8 +64,31 @@ const CoinDetailedScreen = () => {
                     price_change_percentage_24h={price_change_percentage_24h}
                     usd={usd}
                 />
-                <View className="">
+
+                <View className="flex-row items-center justify-between mx-4">
                     <ChartYLabel format={formatCurrency} style={styles.currentPrice} />
+                    <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${price_change_percentage_24h > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
+                        {price_change_percentage_24h > 0 ? (
+                            <FontAwesome name="caret-up" style={{marginBottom: 2}} size={20} color="white" />
+                        ) : (
+                            <FontAwesome name="caret-down" style={{marginBottom: 2}} size={20} color="white" />
+                        )}
+                        <Text className="text-white font-semibold">{price_change_percentage_24h.toFixed(2)} %</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <CoinSelectedFeatures
+                    coinId={id}
+                    image={small}
+                    name={name}
+                    symbol={symbol}
+                    market_cap_rank={market_cap_rank}
+                    price_change_percentage_24h={price_change_percentage_24h}
+                    usd={usd}
+                />
+
+                <View className="">
+
                 </View>
                 {/*<CoinDetailFooter />*/}
                 <ChartPath
@@ -97,10 +122,10 @@ export default CoinDetailedScreen;
 const styles = StyleSheet.create({
     currentPrice: {
         color: "white",
-        fontSize: 20,
+        fontSize: 23,
         fontWeight: "600",
         letterSpacing: 1,
-        marginHorizontal: 14,
+        marginHorizontal: 0,
         marginTop: 10,
     },
 });
