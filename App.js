@@ -3,6 +3,7 @@ import { View} from 'react-native';
 import HomeScreen from "./src/screens/HomeScreen";
 import CoinDetailedScreen from "./src/screens/CoinDetailedScreen";
 import {NavigationContainer} from "@react-navigation/native";
+import Navigation from "./src/navigation";
 
 export default function App() {
   return (
@@ -14,8 +15,7 @@ export default function App() {
           }}
       >
           <View className="flex-1 bg-[#121212]">
-              {/*<HomeScreen />*/}
-              <CoinDetailedScreen />
+              <Navigation />
               <StatusBar style="light" />
           </View>
 
