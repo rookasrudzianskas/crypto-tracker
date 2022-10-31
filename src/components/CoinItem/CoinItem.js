@@ -23,7 +23,7 @@ const CoinItem = ({item, index}) => {
                             ) : (
                                 <FontAwesome name="caret-down" size={20} color="#FF4B4B" />
                             )}
-                            <Text className="font-bold uppercase text-gray-400/90 tracking-wide">1.02 %</Text>
+                            <Text className="font-bold uppercase text-gray-400/90 tracking-wide">{1.02.toFixed(2)} %</Text>
                         </View>
                     </View>
                 </View>
