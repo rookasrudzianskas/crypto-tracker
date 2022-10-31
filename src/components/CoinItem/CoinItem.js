@@ -38,7 +38,6 @@ const CoinItem = ({marketCoin, index}) => {
                 </View>
             </View>
             <View>
-                {/*<Text className="text-xl font-bold text-white">{String(item.market_cap).replace(/(.)(?=(\d{3})+$)/g,'$1,').slice(0, 10) || 0}</Text>*/}
                 <Text className="text-xl font-bold text-white">{nf.format(market_cap) || 0}</Text>
                 <Text className="font-bold text-gray-400/90 text-[15px] mt-1">MCap 1,079 T</Text>
             </View>
