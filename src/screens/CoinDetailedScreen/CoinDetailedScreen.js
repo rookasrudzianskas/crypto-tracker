@@ -38,11 +38,11 @@ const CoinDetailedScreen = () => {
     }
 
     const changeCoinValue = (value) => {
-        console.warn(value)
+        setCoinValue(parseFloat(value));
     }
 
     const changeUsdValue = (value) => {
-        console.warn(value)
+        setUsdPrice(parseFloat(value));
     }
 
     return (
