@@ -81,13 +81,8 @@ const CoinDetailedScreen = () => {
                 </View>
 
                 <CoinSelectedFeatures
-                    coinId={id}
                     image={small}
-                    name={name}
-                    symbol={symbol}
                     market_cap_rank={market_cap_rank}
-                    price_change_percentage_24h={price_change_percentage_24h}
-                    usd={usd}
                 />
 
                 <ChartPath
