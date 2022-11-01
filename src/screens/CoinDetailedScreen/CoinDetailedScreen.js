@@ -32,7 +32,7 @@ const CoinDetailedScreen = () => {
             const fetchedCoinMarketData = await getCoinMarketChart(coinId);
             setCoin(fetchedCoinData);
             setCoinMarketData(fetchedCoinMarketData);
-            setUsdValue(fetchedCoinData.market_data.current_price.usd);
+            setUsdValue(fetchedCoinData?.market_data?.current_price?.usd.toString());
             setLoading(false);
         })();
     }, []);
