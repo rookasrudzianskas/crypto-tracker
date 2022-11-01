@@ -45,7 +45,6 @@ const CoinDetailedScreen = () => {
         );
     }
 
-
     const {image: { small },
         id,
         name,
