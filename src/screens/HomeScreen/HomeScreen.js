@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, FlatList, RefreshControl} from 'react-native';
+import {Text, View, FlatList, RefreshControl} from 'react-native';
 import CoinItem from "../../components/CoinItem";
 import {getMarketData} from "../../services/requests";
 
