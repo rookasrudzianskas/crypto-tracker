@@ -10,15 +10,16 @@ import {ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from '@rainbow-me/a
 import 'react-native-gesture-handler';
 import CoinSelectedFeatures from "./components/CoinSelectedFeatures";
 import {useRoute} from "@react-navigation/native";
-import {getDetailedCoinData} from "../../services/requests";
+import {getCoinMarketChart, getDetailedCoinData} from "../../services/requests";
 
 const CoinDetailedScreen = () => {
-    const screenWidth = Dimensions.get('window').width;
+    const [coin, setCoin] = useState(null);
+    const [coinMarketData, setCoinMarketData] = useState(null);
+
     const {image: { small },
         id,
         name,
         symbol,
-        prices,
         market_data: {
             market_cap_rank,
             price_change_percentage_24h,
@@ -26,13 +27,15 @@ const CoinDetailedScreen = () => {
                 usd,
             }
         }
-    } = cryptoCurrencyData;
+    } = coin || {};
 
-    const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
+    const screenWidth = Dimensions.get('window').width;
     const [coinValue, setCoinValue] = useState('1');
-    const [usdValue, setUsdValue] = useState(usd.toString());
     const [loading, setLoading] = useState(false);
-    const [coin, setCoin] = useState(null);
+
+    const { prices } = coinMarketData;
+    const [usdValue, setUsdValue] = useState(usd.toString());
+    const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
     const nf = Intl.NumberFormat();
     const route = useRoute();
     const { coinId } = route.params;
@@ -41,20 +44,16 @@ const CoinDetailedScreen = () => {
         (async () => {
             setLoading(true);
             const fetchedCoinData = await getDetailedCoinData(coinId);
+            const fetchedCoinMarketData = await getCoinMarketChart(coinId);
             setCoin(fetchedCoinData);
+            setCoinMarketData(fetchedCoinMarketData);
             setUsdValue(fetchedCoinData.market_data.current_price.usd.toString());
             // console.log(fetchedCoinData);
             setLoading(false);
         })();
     }, []);
 
-    if (loading || !coin) {
-        return (
-            <View className="h-screen items-center justify-center">
-                <ActivityIndicator />
-            </View>
-        )
-    }
+
 
         const formatCurrency = (value) => {
         "worklet";
