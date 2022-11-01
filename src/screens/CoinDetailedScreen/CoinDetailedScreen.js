@@ -18,6 +18,8 @@ const CoinDetailedScreen = () => {
 
     const screenWidth = Dimensions.get('window').width;
     const [loading, setLoading] = useState(false);
+    const [coinValue, setCoinValue] = useState('1');
+    const [usdValue, setUsdValue] = useState("2");
 
     const nf = Intl.NumberFormat();
     const route = useRoute();
@@ -57,8 +59,6 @@ const CoinDetailedScreen = () => {
     } = coin || {};
 
     const { prices } = coinMarketData;
-    const [coinValue, setCoinValue] = useState('1');
-    const [usdValue, setUsdValue] = useState(usd.toString());
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
 
         const formatCurrency = (value) => {
