@@ -16,6 +16,33 @@ const CoinDetailedScreen = () => {
     const [coin, setCoin] = useState(null);
     const [coinMarketData, setCoinMarketData] = useState(null);
 
+    const screenWidth = Dimensions.get('window').width;
+    const [loading, setLoading] = useState(false);
+
+    const nf = Intl.NumberFormat();
+    const route = useRoute();
+    const { coinId } = route.params;
+
+    useEffect(() => {
+        (async () => {
+            setLoading(true);
+            const fetchedCoinData = await getDetailedCoinData(coinId);
+            const fetchedCoinMarketData = await getCoinMarketChart(coinId);
+            setCoin(fetchedCoinData);
+            setCoinMarketData(fetchedCoinMarketData);
+            setLoading(false);
+        })();
+    }, []);
+
+    if(loading || !coin || !coinMarketData) {
+        return (
+            <View className="h-screen justify-center items-center">
+                <ActivityIndicator />
+            </View>
+        );
+    }
+
+
     const {image: { small },
         id,
         name,
@@ -29,31 +56,10 @@ const CoinDetailedScreen = () => {
         }
     } = coin || {};
 
-    const screenWidth = Dimensions.get('window').width;
-    const [coinValue, setCoinValue] = useState('1');
-    const [loading, setLoading] = useState(false);
-
     const { prices } = coinMarketData;
+    const [coinValue, setCoinValue] = useState('1');
     const [usdValue, setUsdValue] = useState(usd.toString());
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
-    const nf = Intl.NumberFormat();
-    const route = useRoute();
-    const { coinId } = route.params;
-
-    useEffect(() => {
-        (async () => {
-            setLoading(true);
-            const fetchedCoinData = await getDetailedCoinData(coinId);
-            const fetchedCoinMarketData = await getCoinMarketChart(coinId);
-            setCoin(fetchedCoinData);
-            setCoinMarketData(fetchedCoinMarketData);
-            setUsdValue(fetchedCoinData.market_data.current_price.usd.toString());
-            // console.log(fetchedCoinData);
-            setLoading(false);
-        })();
-    }, []);
-
-
 
         const formatCurrency = (value) => {
         "worklet";
