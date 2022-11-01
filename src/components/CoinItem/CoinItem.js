@@ -35,7 +35,7 @@ const CoinItem = ({marketCoin, index}) => {
                 <View className="items-start ml-3 w-[200px] ">
                     <Text className="text-white text-xl font-semibold -mb-1">{name || 'Loading...'}</Text>
                     <View className="flex-row items-center">
-                        <View className="w-5 h-5 bg-gray-600 rounded-md items-center justify-center mr-2 mt-1">
+                        <View className="px-[4px] py-[2px] bg-gray-600 rounded-md items-center justify-center mr-2 mt-1">
                             <Text className="text-white font-bold">{index}</Text>
                         </View>
                         <Text className="font-bold uppercase text-gray-400/90 mr-2 tracking-wider mt-1">{symbol || 'Loading...'}</Text>

@@ -32,6 +32,7 @@ const HomeScreen = () => {
         <View className=" pt-16">
             <FlatList
                 data={coins}
+                onEndReached={() => fetchCoins(coins.length / 50 + 1)}
                 refreshControl={
                     <RefreshControl refreshing={loading} tintColor={'white'} onRefresh={refetchCoins} />
                 }
