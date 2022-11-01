@@ -1,7 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 import { View} from 'react-native';
-import HomeScreen from "./src/screens/HomeScreen";
-import CoinDetailedScreen from "./src/screens/CoinDetailedScreen";
 import {NavigationContainer} from "@react-navigation/native";
 import Navigation from "./src/navigation";
 
