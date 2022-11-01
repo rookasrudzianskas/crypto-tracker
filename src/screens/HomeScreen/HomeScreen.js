@@ -34,7 +34,7 @@ const HomeScreen = () => {
     return (
         <View className=" pt-16">
             <FlatList
-                data={cryptoData}
+                data={coins}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item, index}) => (
