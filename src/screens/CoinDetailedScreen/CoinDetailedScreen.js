@@ -19,7 +19,7 @@ const CoinDetailedScreen = () => {
     const screenWidth = Dimensions.get('window').width;
     const [loading, setLoading] = useState(false);
     const [coinValue, setCoinValue] = useState('1');
-    const [usdValue, setUsdValue] = useState("2");
+    const [usdValue, setUsdValue] = useState("0.00");
 
     const nf = Intl.NumberFormat();
     const route = useRoute();
@@ -32,6 +32,7 @@ const CoinDetailedScreen = () => {
             const fetchedCoinMarketData = await getCoinMarketChart(coinId);
             setCoin(fetchedCoinData);
             setCoinMarketData(fetchedCoinMarketData);
+            setUsdValue(fetchedCoinData.market_data.current_price.usd);
             setLoading(false);
         })();
     }, []);
