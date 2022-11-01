@@ -1,7 +1,6 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, FlatList, RefreshControl} from 'react-native';
-import cryptoData from "../../../assets/data/cryptocurrencies.json";
 import CoinItem from "../../components/CoinItem";
 import {getMarketData} from "../../services/requests";
 
@@ -13,7 +12,7 @@ const HomeScreen = () => {
         if(loading) return;
         setLoading(true);
         const coinsData = await getMarketData(pageNumber);
-        setCoins(coinsData);
+        setCoins((existingCoins) => [...existingCoins, ...coinsData]);
         setLoading(false);
     }
 
