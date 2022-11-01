@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {Text, View, StyleSheet, FlatList, RefreshControl} from 'react-native';
 import cryptoData from "../../../assets/data/cryptocurrencies.json";
 import CoinItem from "../../components/CoinItem";
 import {getMarketData} from "../../services/requests";
@@ -18,9 +18,7 @@ const HomeScreen = () => {
     }
 
     const refetchCoins = async () => {
-        if (loading) {
-            return;
-        }
+        if(loading) return;
         setLoading(true);
         const coinsData = await getMarketData()
         setCoins(coinsData)
@@ -35,6 +33,9 @@ const HomeScreen = () => {
         <View className=" pt-16">
             <FlatList
                 data={coins}
+                refreshControl={
+                    <RefreshControl refreshing={loading} tintColor={'white'} onRefresh={refetchCoins} />
+                }
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item, index}) => (
