@@ -26,3 +26,6 @@ export const getMarketData = async (pageNumber = 1) => {
         console.log(e)
     }
 }
+
+
+// Path: src/screens/CoinDetailedScreen/CoinDetailedScreen.js
