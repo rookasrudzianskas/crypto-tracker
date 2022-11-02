@@ -12,5 +12,5 @@ export const allPortfolioBoughtAssets = selector({
 
 export const allPortfolioAssets = atom({
     key: 'allPortfolioAssets',
-    default: [],
+    default: allPortfolioBoughtAssets,
 })

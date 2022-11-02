@@ -4,12 +4,15 @@ import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import PortfolioAssetItem from "../PortfolioAssetItem";
+import {useRecoilState} from "recoil";
+import {allPortfolioAssets} from "../../../../atoms/PortfolioAssets";
 
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
     const price_change_percentage_24h = 0.5;
+    const [assets, setAssets] = useRecoilState(allPortfolioAssets);
 
-
+    console.log(assets);
 
     return (
         <FlatList

@@ -1,13 +1,13 @@
 //@ts-nocheck
-import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import React, {Suspense} from 'react';
+import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import PortfolioAssetsList from "./components/PortfolioAssetsList";
 
 const PortfolioScreen = () => {
     return (
-        <View>
+        <Suspense fallback={<View className="h-screen items-center justify-center"><ActivityIndicator /></View>}>
             <PortfolioAssetsList />
-        </View>
+        </Suspense>
     );
 };
 
