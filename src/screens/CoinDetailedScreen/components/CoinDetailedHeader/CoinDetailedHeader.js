@@ -16,7 +16,8 @@ const CoinDetailedHeader = ({name}) => {
                     <Text className="text-white text-lg font-semibold">{name || 'Loading...'}</Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.7}>
-                    <EvilIcons className="" name="user" size={27} color="white" />
+                    {/*<FontAwesome name="star" size={24} color="white" />*/}
+                    <FontAwesome name="star-o" size={24} color="white" />
                 </TouchableOpacity>
             </View>
         </View>
