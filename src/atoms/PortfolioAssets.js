@@ -8,7 +8,7 @@ export const allPortfolioBoughtAssets = selector({
         const jsonValue = await AsyncStorage.getItem('@portfolio_coins');
         return jsonValue != null ? JSON.parse(jsonValue) : [];
     }
-})
+});
 
 export const allPortfolioBoughtAssetsFromAPI = selector({
     key: 'allPortfolioBoughtAssetsFromAPI',
@@ -30,14 +30,14 @@ export const allPortfolioBoughtAssetsFromAPI = selector({
             (item1.quantityBought * item1.currentPrice) < (item2.quantityBought * item2.currentPrice));
 
     }
-})
+});
 
 export const allPortfolioAssets = atom({
     key: 'allPortfolioAssets',
     default: allPortfolioBoughtAssetsFromAPI,
-})
+});
 
 export const allPortfolioBoughtAssetsInStorage = atom({
     key: 'allPortfolioBoughtAssetsInStorage',
     default: allPortfolioBoughtAssets,
-})
+});
