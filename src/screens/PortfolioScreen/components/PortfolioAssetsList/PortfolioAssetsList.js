@@ -33,6 +33,8 @@ const PortfolioAssetsList = () => {
     return (
         <FlatList
             data={assets}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
             renderItem={({item}) => <PortfolioAssetItem assetItem={item} />}
             ListHeaderComponent={
                 <View className="pt-16 mx-4">
