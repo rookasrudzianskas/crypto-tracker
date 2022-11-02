@@ -1,16 +1,16 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import {useRecoilState} from "recoil";
 import {allPortfolioBoughtAssetsInStorage} from "../../atoms/PortfolioAssets";
-import {getAllCoins} from "../../services/requests";
+import {getAllCoins, getDetailedCoinData} from "../../services/requests";
 
 const AddNewAssetScreen = () => {
     const navigation = useNavigation();
     const [allCoins, setAllCoins] = useState([]);
-    const [boughtAssetQuantity, setBoughtAssetQuantity] = useState("");
+    const [boughtAssetQuantity, setBoughtAssetQuantity] = useState(0);
     const [loading, setLoading] = useState(false);
     const [selectedCoinId, setSelectedCoinId] = useState(null);
     const [selectedCoin, setSelectedCoin] = useState(null);
@@ -19,13 +19,7 @@ const AddNewAssetScreen = () => {
         allPortfolioBoughtAssetsInStorage
     );
 
-    const isQuantityEntered = () => boughtAssetQuantity === "";
-    console.log(isQuantityEntered())
-
-    useEffect(() => {
-        console.log(boughtAssetQuantity, "- bought asset quantity")
-        console.log(isQuantityEntered())
-    }, [isQuantityEntered()])
+    const isQuantityEntered = () => boughtAssetQuantity > 0;
 
     const fetchAllCoins = async () => {
         if(loading) return;
@@ -35,14 +29,36 @@ const AddNewAssetScreen = () => {
         setLoading(false);
     }
 
+    const fetchCoinInfo = async () => {
+        if(loading) return;
+        setLoading(true);
+        const coinInfo = await getDetailedCoinData(selectedCoinId);
+        setSelectedCoin(coinInfo);
+        setLoading(false);
+    };
+
     useEffect(() => {
         fetchAllCoins();
     }, []);
+
+    useEffect(() => {
+        if (selectedCoinId) {
+            fetchCoinInfo();
+        }
+    }, [selectedCoinId]);
 
     const onAddNewAsset = () => {
         const newAsset = {
             id: selectedCoin.id,
         }
+    }
+
+    if(loading || !allCoins) {
+        return (
+            <View className="h-screen items-center justify-center">
+                <ActivityIndicator />
+            </View>
+        )
     }
 
     return (

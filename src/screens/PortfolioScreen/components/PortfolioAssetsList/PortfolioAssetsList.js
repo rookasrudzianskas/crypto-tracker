@@ -12,8 +12,6 @@ const PortfolioAssetsList = () => {
     const price_change_percentage_24h = 0.5;
     const assets = useRecoilValue(allPortfolioAssets);
 
-    console.log(assets);
-
     return (
         <FlatList
             data={assets}
