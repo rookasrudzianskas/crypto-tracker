@@ -25,6 +25,12 @@ const PortfolioAssetsList = () => {
         return (currentBalance - boughtBalance).toFixed(2);
     }
 
+    const getCurrentPercentageChange = () => {
+        const currentBalance = getCurrentBalance();
+        const boughtBalance = assets.reduce((total, currentAsset) => total + currentAsset.priceBought * currentAsset.quantityBought, 0);
+        return (((currentBalance - boughtBalance) / boughtBalance) * 100).toFixed(2) || 0;
+    }
+
     return (
         <FlatList
             data={assets}
@@ -40,13 +46,13 @@ const PortfolioAssetsList = () => {
                             <Text className="text-green-700 font-[500] tracking-wider">${getCurrentValueChange() || 0} (All time)</Text>
                         </View>
                         <View>
-                            <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${price_change_percentage_24h && price_change_percentage_24h > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
-                                {price_change_percentage_24h > 0 ? (
+                            <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${getCurrentPercentageChange() > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
+                                {getCurrentPercentageChange() > 0 ? (
                                     <FontAwesome name="caret-up" style={{marginBottom: 2}} size={20} color="white" />
                                 ) : (
                                     <FontAwesome name="caret-down" style={{marginBottom: 2}} size={20} color="white" />
                                 )}
-                                <Text className="text-white font-semibold">{price_change_percentage_24h.toFixed(2) || 0} %</Text>
+                                <Text className="text-white font-semibold">{getCurrentPercentageChange() || 0}%</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
