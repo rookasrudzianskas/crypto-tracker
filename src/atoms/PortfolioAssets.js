@@ -14,7 +14,11 @@ export const allPortfolioBoughtAssetsFromAPI = selector({
     key: 'allPortfolioBoughtAssetsFromAPI',
     get: async ({get}) => {
         const boughtPortfolioAssets = get(allPortfolioBoughtAssetsInStorage);
+        const portfolioAssetsMarketData = await getWatchlistedCoins(1, boughtPortfolioAssets.map((portfolioAsset) => portfolioAsset.id).join(','));
 
+        const boughtAssets = boughtPortfolioAssets.map((boughtAsset) => {
+
+        })
     }
 })
 
