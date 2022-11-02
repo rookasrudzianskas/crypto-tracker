@@ -101,13 +101,13 @@ const CoinDetailedScreen = () => {
 
                 <View className="flex-row items-center justify-between mx-4">
                     <ChartYLabel format={formatCurrency} style={styles.currentPrice} />
-                    <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${price_change_percentage_24h > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
+                    <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${price_change_percentage_24h && price_change_percentage_24h > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
                         {price_change_percentage_24h > 0 ? (
                             <FontAwesome name="caret-up" style={{marginBottom: 2}} size={20} color="white" />
                         ) : (
                             <FontAwesome name="caret-down" style={{marginBottom: 2}} size={20} color="white" />
                         )}
-                        <Text className="text-white font-semibold">{price_change_percentage_24h.toFixed(2)} %</Text>
+                        <Text className="text-white font-semibold">{price_change_percentage_24h.toFixed(2) || 0} %</Text>
                     </TouchableOpacity>
                 </View>
 
