@@ -17,7 +17,13 @@ export const allPortfolioBoughtAssetsFromAPI = selector({
         const portfolioAssetsMarketData = await getWatchlistedCoins(1, boughtPortfolioAssets.map((portfolioAsset) => portfolioAsset.id).join(','));
 
         const boughtAssets = boughtPortfolioAssets.map((boughtAsset) => {
+            const portfolioAsset = portfolioAssetsMarketData.filter((item) => boughtAsset.id === item.id)[0];
 
+            return {
+                ...boughtAsset,
+                currentPrice: portfolioAsset.current_price,
+                priceChangePercentage: portfolioAsset.price_change_percentage_24h
+            }
         })
     }
 })
