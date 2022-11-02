@@ -2,14 +2,36 @@
 import React from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
+import SearchableDropdown from "react-native-searchable-dropdown";
 
 const AddNewAssetScreen = () => {
     const navigation = useNavigation();
     return (
         <View className="mx-4">
-            <View className="border border-gray-500 border-[2px] rounded py-2 px-2 bg-gray-800/30 mt-7">
-                <TextInput autoCapitalize={'none'} className="text-gray-300 bg-transparent" placeholder="Asset Name" />
-            </View>
+            {/*<View className="border border-gray-500 border-[2px] rounded py-2 px-2 bg-gray-800/30 mt-7">*/}
+            {/*    <TextInput autoCapitalize={'none'} className="text-gray-300 bg-transparent" placeholder="Asset Name" />*/}
+            {/*</View>*/}
+            <SearchableDropdown
+                items={[]}
+                onItemSelect={(item) => {}}
+                containerStyle={styles.dropdownContainer}
+                itemStyle={styles.item}
+                itemTextStyle={{ color: "white" }}
+                resetValue={false}
+                placeholder={"Select a coin..."}
+                placeholderTextColor="white"
+                textInputProps={{
+                    underlineColorAndroid: "transparent",
+                    style: {
+                        padding: 12,
+                        borderWidth: 1.5,
+                        borderColor: "#444444",
+                        borderRadius: 5,
+                        backgroundColor: "#1e1e1e",
+                        color: "white",
+                    },
+                }}
+            />
             <View className="h-[90%] items-center">
                 <View className="mt-16">
                     <View className="flex-row items-center justify-center">
@@ -31,3 +53,13 @@ const AddNewAssetScreen = () => {
 };
 
 export default AddNewAssetScreen;
+
+const styles = StyleSheet.create({
+   dropdownContainer: {
+       marginTop: 20,
+       width: "100%",
+       borderRadius: 5,
+       backgroundColor: "#1e1e1e",
+       color: "white",
+   }
+});
