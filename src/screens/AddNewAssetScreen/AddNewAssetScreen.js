@@ -1,16 +1,19 @@
 //@ts-nocheck
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import SearchableDropdown from "react-native-searchable-dropdown";
 
 const AddNewAssetScreen = () => {
     const navigation = useNavigation();
+    const [allCoins, setAllCoins] = useState([]);
+    const [boughtAssetQuantity, setBoughtAssetQuantity] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [selectedCoinId, setSelectedCoinId] = useState(null);
+    const [selectedCoin, setSelectedCoin] = useState(null);
+
     return (
         <View className="mx-4">
-            {/*<View className="border border-gray-500 border-[2px] rounded py-2 px-2 bg-gray-800/30 mt-7">*/}
-            {/*    <TextInput autoCapitalize={'none'} className="text-gray-300 bg-transparent" placeholder="Asset Name" />*/}
-            {/*</View>*/}
             <SearchableDropdown
                 items={[]}
                 onItemSelect={(item) => {}}
@@ -35,7 +38,7 @@ const AddNewAssetScreen = () => {
             <View className="h-[90%] items-center">
                 <View className="mt-16">
                     <View className="flex-row items-center justify-center">
-                        <TextInput keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
+                        <TextInput value={boughtAssetQuantity} onChangeText={(text) => setBoughtAssetQuantity(text)} keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
                         <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">BTC</Text>
                     </View>
                     <View className="items-center justify-center mt-2">
