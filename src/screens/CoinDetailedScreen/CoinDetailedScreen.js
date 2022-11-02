@@ -25,6 +25,9 @@ const CoinDetailedScreen = () => {
     const route = useRoute();
     const { coinId } = route.params;
 
+    const times =  ['1h', '24h', '7d', '30d', '1y', 'All'];
+    const [selectedTime, setSelectedTime] = useState(times[0]);
+
     useEffect(() => {
         (async () => {
             setLoading(true);
@@ -117,10 +120,19 @@ const CoinDetailedScreen = () => {
                     </TouchableOpacity>
                 </View>
 
-                <CoinSelectedFeatures
-                    image={small}
-                    market_cap_rank={market_cap_rank}
-                />
+                <View className="mx-4">
+                    <CoinSelectedFeatures
+                        market_cap_rank={market_cap_rank}
+                        image={small}
+                    />
+                    <View className="flex-row py-1 px-2 rounded-lg bg-gray-700/60 justify-between space-x-2 mt-3">
+                        {times.map((time, index) => (
+                            <TouchableOpacity onPress={() => setSelectedTime(time)} className={`${selectedTime === time && ' bg-gray-900/80 rounded-lg'} py-2 flex-1 items-center justify-center`} key={index} activeOpacity={0.7}>
+                                <Text className={` ${selectedTime === time ? 'text-white' : 'text-gray-400'} font-bold`}>{time}</Text>
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+                </View>
 
                 <ChartPath
                     strokeWidth={2}
