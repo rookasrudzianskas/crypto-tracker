@@ -38,11 +38,11 @@ const HomeScreen = () => {
                 }
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
-                renderItem={({item, index}) => (
-                    <CoinItem marketCoin={item} index={index} />
-                )} />
+                renderItem={_renderitem} />
         </View>
     );
 };
+
+const _renderitem = ({item, index}) => <CoinItem marketCoin={item} index={index} />
 
 export default HomeScreen;

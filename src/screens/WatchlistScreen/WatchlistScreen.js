@@ -42,7 +42,7 @@ const WatchlistScreen = () => {
             <FlatList
                 style={{height:  '100%'}}
                 data={coins}
-                renderItem={({item, index}) => <CoinItem marketCoin={item} index={index} />}
+                renderItem={_renderitem}
                 refreshControl={
                     <RefreshControl
                         refreshing={loading}
@@ -54,5 +54,7 @@ const WatchlistScreen = () => {
         </View>
     );
 };
+
+const _renderitem = ({item, index}) => <CoinItem marketCoin={item} index={index} />
 
 export default WatchlistScreen;

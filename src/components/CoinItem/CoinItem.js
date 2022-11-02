@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from 'react';
+import React, {memo} from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
@@ -61,4 +61,4 @@ const CoinItem = ({marketCoin, index}) => {
     );
 };
 
-export default CoinItem;
+export default memo(CoinItem);
