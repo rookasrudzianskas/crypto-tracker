@@ -11,6 +11,7 @@ import 'react-native-gesture-handler';
 import CoinSelectedFeatures from "./components/CoinSelectedFeatures";
 import {useRoute} from "@react-navigation/native";
 import {getCoinMarketChart, getDetailedCoinData} from "../../services/requests";
+import FilterComponent from "./components/FilterComponent";
 
 const CoinDetailedScreen = () => {
     const [coin, setCoin] = useState(null);
@@ -20,13 +21,19 @@ const CoinDetailedScreen = () => {
     const [loading, setLoading] = useState(false);
     const [coinValue, setCoinValue] = useState('1');
     const [usdValue, setUsdValue] = useState("0.00");
+    const [selectedRange, setSelectedRange] = useState("1");
 
     const nf = Intl.NumberFormat();
     const route = useRoute();
     const { coinId } = route.params;
 
-    const times =  ['1h', '24h', '7d', '30d', '1y', 'All'];
-    const [selectedTime, setSelectedTime] = useState(times[0]);
+    const filterDaysArray = [
+        { filterDay: "1", filterText: "24h" },
+        { filterDay: "7", filterText: "7d" },
+        { filterDay: "30", filterText: "30d" },
+        { filterDay: "365", filterText: "1y" },
+        { filterDay: "max", filterText: "All" },
+    ];
 
     useEffect(() => {
         (async () => {
@@ -90,6 +97,11 @@ const CoinDetailedScreen = () => {
         setCoinValue((floatValue / usd).toString())
     }
 
+    const onSelectedRangeChange = (selectedRangeValue) => {
+        setSelectedRange(selectedRangeValue);
+        // fetchMarketCoinData(selectedRangeValue);
+    };
+
     return (
         <View className="pt-12">
             <ChartPathProvider
@@ -125,12 +137,16 @@ const CoinDetailedScreen = () => {
                         market_cap_rank={market_cap_rank}
                         image={small}
                     />
-                    <View className="flex-row py-1 px-2 rounded-lg bg-gray-700/60 justify-between space-x-2 mt-3">
-                        {times.map((time, index) => (
-                            <TouchableOpacity onPress={() => setSelectedTime(time)} className={`${selectedTime === time && ' bg-gray-900/80 rounded-lg'} py-2 flex-1 items-center justify-center`} key={index} activeOpacity={0.7}>
-                                <Text className={` ${selectedTime === time ? 'text-white' : 'text-gray-400'} font-bold`}>{time}</Text>
-                            </TouchableOpacity>
-                        ))}
+                    <View className="flex-row py-1 px-2 rounded-lg bg-gray-700/60 justify-between space-x-2 my-3">
+                        {filterDaysArray.map((day) => (
+                                <FilterComponent
+                                    filterDay={day.filterDay}
+                                    filterText={day.filterText}
+                                    selectedRange={selectedRange}
+                                    setSelectedRange={onSelectedRangeChange}
+                                    key={day.filterText}
+                                />
+                            ))}
                     </View>
                 </View>
 

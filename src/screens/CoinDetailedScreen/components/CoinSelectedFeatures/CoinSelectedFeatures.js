@@ -12,7 +12,7 @@ const CoinSelectedFeatures = ({ image, market_cap_rank }) => {
             <View className="flex-row items-center space-x-1">
                 <Ionicons name="swap-vertical-outline" size={17} color="gray" />
                 <Text className="text-white tracking-wider">{(market_cap_rank).toFixed(2)}</Text>
-                <Image source={{uri: image }} className="h-4 w-4" />
+                <Image source={{uri: image }} className="h-4 w-4 rounded-full" />
             </View>
         </View>
     );
