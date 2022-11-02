@@ -24,6 +24,9 @@ export const WatchlistProvider = ({ children }) => {
     const storeWatchlistCoinId = async (coinId) => {
         try {
             const newWatchlist = [...watchlistCoinIds, coinId];
+            const jsonValue = JSON.stringify(newWatchlist);
+            await AsyncStorage.setItem('@watchlist_coins', jsonValue);
+            setWatchlistCoinIds(newWatchlist);
         } catch (error) {
             console.log(error);
         }
