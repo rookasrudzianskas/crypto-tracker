@@ -9,6 +9,7 @@ import {getAllCoins, getDetailedCoinData} from "../../services/requests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {LogBox} from "react-native";
 
+// Not the best solution, but it works
 LogBox.ignoreLogs(['Please report: Excessive number of pending callbacks:']);
 
 const AddNewAssetScreen = () => {
