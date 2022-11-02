@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from 'react';
+import React, {memo} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 const FilterComponent = (props) => {
@@ -16,4 +16,4 @@ const FilterComponent = (props) => {
     );
 };
 
-export default FilterComponent;
+export default memo(FilterComponent);
