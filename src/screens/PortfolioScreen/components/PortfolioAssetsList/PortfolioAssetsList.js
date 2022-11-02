@@ -4,19 +4,19 @@ import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import PortfolioAssetItem from "../PortfolioAssetItem";
-import {useRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import {allPortfolioAssets} from "../../../../atoms/PortfolioAssets";
 
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
     const price_change_percentage_24h = 0.5;
-    const [assets, setAssets] = useRecoilState(allPortfolioAssets);
+    const assets = useRecoilValue(allPortfolioAssets);
 
     console.log(assets);
 
     return (
         <FlatList
-            data={[1, 2, 3, 4]}
+            data={assets}
             renderItem={({item}) => <PortfolioAssetItem assetItem={item} />}
             ListHeaderComponent={
                 <View className="pt-16 mx-4">
