@@ -16,9 +16,6 @@ const WatchlistScreen = () => {
         if(loading) return;
         setLoading(true);
         const watchlistedCoinsData = await getWatchlistedCoins(1, transformCoinIds());
-        // filter the existing ones, and add the new ones
-        // setCoins([...coins.filter(coin => watchlistCoinIds.includes(coin.id)), ...watchlistedCoinsData]);
-        // setCoins((existingCoins) => );
         setCoins((existingCoins) => [...existingCoins, ...watchlistedCoinsData]);
         setLoading(false);
     }
