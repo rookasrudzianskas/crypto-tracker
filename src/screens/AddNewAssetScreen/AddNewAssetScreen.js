@@ -50,6 +50,11 @@ const AddNewAssetScreen = () => {
     const onAddNewAsset = () => {
         const newAsset = {
             id: selectedCoin.id,
+            name: selectedCoin.name,
+            image: selectedCoin.image.small,
+            ticker: selectedCoin.symbol.toUpperCase(),
+            quantityBought: parseFloat(boughtAssetQuantity),
+            priceBought: selectedCoin.market_data.current_price.usd,
         }
     }
 
@@ -60,6 +65,8 @@ const AddNewAssetScreen = () => {
             </View>
         )
     }
+
+    const {symbol, market_data: { current_price }} = selectedCoin;
 
     return (
         <View className="mx-4">
@@ -90,10 +97,10 @@ const AddNewAssetScreen = () => {
                         <View className="flex-row items-center justify-center">
                             <TextInput value={boughtAssetQuantity} onChangeText={setBoughtAssetQuantity}
                                        keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
-                            <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">BTC</Text>
+                            <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">{symbol || 'Loading...'}</Text>
                         </View>
                         <View className="items-center justify-center mt-2">
-                            <Text className="text-gray-500 font-bold tracking-wider">47018.00$ per coin</Text>
+                            <Text className="text-gray-500 font-bold tracking-wider">${current_price?.usd || 'Loading...'} per coin</Text>
                         </View>
                     </View>
                 )}
