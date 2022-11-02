@@ -1,11 +1,12 @@
 //@ts-nocheck
 import React from 'react';
-import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, FlatList, TouchableOpacity, Pressable} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import PortfolioAssetItem from "../PortfolioAssetItem";
 import {useRecoilValue} from "recoil";
 import {allPortfolioAssets} from "../../../../atoms/PortfolioAssets";
+import {SwipeListView} from "react-native-swipe-list-view";
 
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
@@ -30,12 +31,35 @@ const PortfolioAssetsList = () => {
         return (((currentBalance - boughtBalance) / boughtBalance) * 100).toFixed(2) || 0;
     }
 
+
+    const renderDeleteButton = (data) => {
+        return (
+            <Pressable activeOpacity={1}
+                style={{
+                    flex: 1,
+                    backgroundColor: "#EA3943",
+                    alignItems: "flex-end",
+                    justifyContent: "center",
+                    paddingRight: 30,
+                    marginHorizontal: 20,
+                }}
+                // onPress={() => onDeleteAsset(data)}
+            >
+                <FontAwesome name="trash-o" size={22} color="white" />
+            </Pressable>
+        );
+    };
+
     return (
-        <FlatList
+        <SwipeListView
             data={assets}
+            renderItem={({item}) => <PortfolioAssetItem assetItem={item} />}
+            rightOpenValue={-75}
+            disableRightSwipe
+            renderHiddenItem={(data) => renderDeleteButton(data)}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            renderItem={({item}) => <PortfolioAssetItem assetItem={item} />}
+            keyExtractor={({id}, index) => `${id}${index}`}
             ListHeaderComponent={
                 <View className="pt-16 mx-4">
                     <View>
@@ -63,7 +87,7 @@ const PortfolioAssetsList = () => {
                 </View>
             }
             ListFooterComponent={
-                <TouchableOpacity activeOpacity={0.7} className=" mx-4 flex-row items-center justify-center py-3 bg-blue-600 rounded-md"
+                <TouchableOpacity activeOpacity={0.7} className=" mx-8 flex-row items-center justify-center py-3 bg-blue-600 rounded-md"
                     onPress={() => navigation.navigate("AddNewAssetScreen")}
                 >
                     <Text className="text-white font-bold">Add New Asset</Text>

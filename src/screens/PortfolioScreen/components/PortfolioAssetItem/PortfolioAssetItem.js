@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image, Pressable} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
 
 const PortfolioAssetItem = ({ assetItem }) => {
@@ -26,9 +26,9 @@ const PortfolioAssetItem = ({ assetItem }) => {
     const renderHoldings = () => normalizePrice(currentPrice * quantityBought);
 
     return (
-        <TouchableOpacity activeOpacity={0.7} className="mx-4">
+        <Pressable activeOpacity={1} className="mx-4 bg-[#121212]">
            <View className=" flex-row justify-between">
-               <View className="flex-row items-center">
+               <View className="flex-row items-center ml-4">
                    <Image source={{ uri: image || 'https://as2.ftcdn.net/v2/jpg/02/88/85/71/1000_F_288857162_l7ZOOsEveQf1d8PMsNC6HMQFeqafLJhx.jpg'}} className="w-7 h-7 rounded-full" />
                    <View className="flex-col ml-2">
                        <Text className="text-white font-bold text-[17px] mb-1">{name.slice(0, 15) || 'Loading...'}</Text>
@@ -48,13 +48,13 @@ const PortfolioAssetItem = ({ assetItem }) => {
                        </TouchableOpacity>
                    </View>
                </View>
-               <View>
+               <View className="mr-4">
                    <Text className="text-white font-bold text-[17px] text-right">${renderHoldings() || 0}</Text>
                    <Text className="text-gray-500 font-semibold text-[14px] text-right">{quantityBought || NaN} {ticker?.toUpperCase() || 'Loading..'}</Text>
                </View>
            </View>
-            <View className="border-b border-gray-900 my-3"/>
-        </TouchableOpacity>
+            <View className="py-3"/>
+        </Pressable>
     );
 };
 
