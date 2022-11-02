@@ -5,6 +5,7 @@ import {useNavigation} from "@react-navigation/native";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import {useRecoilState} from "recoil";
 import {allPortfolioBoughtAssetsInStorage} from "../../atoms/PortfolioAssets";
+import {getAllCoins} from "../../services/requests";
 
 const AddNewAssetScreen = () => {
     const navigation = useNavigation();
@@ -40,12 +41,12 @@ const AddNewAssetScreen = () => {
         <View className="mx-4">
             <SearchableDropdown
                 items={allCoins}
-                onItemSelect={(item) => {}}
+                onItemSelect={(item) => setSelectedCoinId(item.id)}
                 containerStyle={styles.dropdownContainer}
                 itemStyle={styles.item}
                 itemTextStyle={{ color: "white" }}
                 resetValue={false}
-                placeholder={"Select a coin..."}
+                placeholder={selectedCoinId || "Select a coin..."}
                 placeholderTextColor="white"
                 textInputProps={{
                     underlineColorAndroid: "transparent",
@@ -88,5 +89,14 @@ const styles = StyleSheet.create({
        borderRadius: 5,
        backgroundColor: "#1e1e1e",
        color: "white",
-   }
+   },
+    item: {
+         padding: 10,
+         marginTop: 2,
+         backgroundColor: "#1e1e1e",
+         borderColor: "#444444",
+         borderWidth: 1.5,
+         borderRadius: 5,
+        marginVertical: 5,
+    }
 });
