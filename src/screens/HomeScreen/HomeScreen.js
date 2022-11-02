@@ -31,20 +31,22 @@ const HomeScreen = () => {
     return (
         <View className=" pt-16">
             <View>
-                <View className="mx-4 mb-2">
-                    <Text className="text-3xl font-bold text-white tracking-wider">Crypto assets</Text>
+                <View className="mx-4">
+                    <Text style={{ fontFamily: 'Inter_900Black' }} className="text-3xl font-bold text-white tracking-wider mb-2">Crypto assets</Text>
                 </View>
             </View>
-            <FlatList
-                data={coins}
-                onEndReached={() => fetchCoins(coins.length / 49 + 1)}
-                refreshControl={
-                    <RefreshControl refreshing={loading} tintColor={'white'} onRefresh={refetchCoins} />
-                }
-                keyExtractor={item => item.id}
-                showsVerticalScrollIndicator={false}
-                renderItem={({item, index}) => <CoinItem marketCoin={item} index={index} />}
-            />
+            <View>
+                <FlatList
+                    data={coins}
+                    onEndReached={() => fetchCoins(coins.length / 49 + 1)}
+                    refreshControl={
+                        <RefreshControl refreshing={loading} tintColor={'white'} onRefresh={refetchCoins} />
+                    }
+                    keyExtractor={item => item.id}
+                    showsVerticalScrollIndicator={false}
+                    renderItem={({item, index}) => <CoinItem marketCoin={item} index={index} />}
+                />
+            </View>
         </View>
     );
 };

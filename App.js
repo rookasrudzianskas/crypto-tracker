@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {NavigationContainer} from "@react-navigation/native";
 import Navigation from "./src/navigation";
 import WatchlistProvider from "./src/contexts/WatchlistContext";
@@ -10,8 +10,22 @@ import {
     useRecoilState,
     useRecoilValue,
 } from 'recoil';
+import {useFonts} from "expo-font";
+import {Inter_900Black} from "@expo-google-fonts/inter";
 
 export default function App() {
+    let [fontsLoaded] = useFonts({
+        Inter_900Black,
+    });
+
+    if(!fontsLoaded) {
+        return (
+            <View className="h-screen items-center justify-center">
+                <ActivityIndicator />
+            </View>
+        )
+    }
+
   return (
       <NavigationContainer
           theme={{
