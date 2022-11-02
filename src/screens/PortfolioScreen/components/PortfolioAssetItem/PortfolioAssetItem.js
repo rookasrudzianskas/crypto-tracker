@@ -24,7 +24,7 @@ const PortfolioAssetItem = ({ assetItem }) => {
     }
 
     const renderHoldings = () => normalizePrice(currentPrice * quantityBought);
-    // 'bg-[#3cbd48]' : 'bg-[#FF4B4B]
+
     return (
         <TouchableOpacity activeOpacity={0.7} className="mx-4">
            <View className=" flex-row justify-between">
