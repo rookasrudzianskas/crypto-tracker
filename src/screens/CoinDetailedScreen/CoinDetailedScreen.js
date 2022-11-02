@@ -35,23 +35,41 @@ const CoinDetailedScreen = () => {
         { filterDay: "max", filterText: "All" },
     ];
 
-    useEffect(() => {
-        (async () => {
-            setLoading(true);
-            const fetchedCoinData = await getDetailedCoinData(coinId);
-            const fetchedCoinMarketData = await getCoinMarketChart(coinId);
-            setCoin(fetchedCoinData);
-            setCoinMarketData(fetchedCoinMarketData);
-            setUsdValue(fetchedCoinData?.market_data?.current_price?.usd.toString());
-            setLoading(false);
-        })();
-        fetchMarketCoinData(1);
-    }, []);
+    // useEffect(() => {
+    //     (async () => {
+    //         setLoading(true);
+    //         const fetchedCoinData = await getDetailedCoinData(coinId);
+    //         const fetchedCoinMarketData = await getCoinMarketChart(coinId);
+    //         setCoin(fetchedCoinData);
+    //         setCoinMarketData(fetchedCoinMarketData);
+    //         setUsdValue(fetchedCoinData?.market_data?.current_price?.usd.toString());
+    //         fetchMarketCoinData(1);
+    //         setLoading(false);
+    //     })();
+    // }, []);
+
+    const fetchCoinData = async () => {
+        setLoading(true);
+        const fetchedCoinData = await getDetailedCoinData(coinId);
+        const fetchedCoinMarketData = await getCoinMarketChart(coinId);
+        setCoin(fetchedCoinData);
+        setCoinMarketData(fetchedCoinMarketData);
+        setUsdValue(fetchedCoinData?.market_data?.current_price?.usd.toString());
+        setLoading(false);
+    };
 
     const fetchMarketCoinData = async (selectedRangeValue) => {
-        const fetchedCoinMarketData = await getCoinMarketChart(coinId, selectedRangeValue);
+        const fetchedCoinMarketData = await getCoinMarketChart(
+            coinId,
+            selectedRangeValue
+        );
         setCoinMarketData(fetchedCoinMarketData);
-    }
+    };
+
+    useEffect(() => {
+        fetchCoinData();
+        fetchMarketCoinData(1);
+    }, []);
 
     if(loading || !coin || !coinMarketData) {
         return (
