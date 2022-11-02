@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React from 'react';
-import {Text, View, StyleSheet, FlatList, TouchableOpacity, Pressable} from 'react-native';
+import {Text, View, TouchableOpacity, Pressable} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import PortfolioAssetItem from "../PortfolioAssetItem";
