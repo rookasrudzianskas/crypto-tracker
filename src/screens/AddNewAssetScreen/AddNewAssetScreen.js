@@ -1,8 +1,10 @@
 //@ts-nocheck
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import SearchableDropdown from "react-native-searchable-dropdown";
+import {useRecoilState} from "recoil";
+import {allPortfolioBoughtAssetsInStorage} from "../../atoms/PortfolioAssets";
 
 const AddNewAssetScreen = () => {
     const navigation = useNavigation();
@@ -12,10 +14,32 @@ const AddNewAssetScreen = () => {
     const [selectedCoinId, setSelectedCoinId] = useState(null);
     const [selectedCoin, setSelectedCoin] = useState(null);
 
+    const [assetsInStorage, setAssetsInStorage] = useRecoilState(
+        allPortfolioBoughtAssetsInStorage
+    );
+
+    const fetchAllCoins = async () => {
+        if(loading) return;
+        setLoading(true);
+        const allCoins = await getAllCoins();
+        setAllCoins(allCoins);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        fetchAllCoins();
+    }, []);
+
+    const onAddNewAsset = () => {
+        const newAsset = {
+            id: selectedCoin.id,
+        }
+    }
+
     return (
         <View className="mx-4">
             <SearchableDropdown
-                items={[]}
+                items={allCoins}
                 onItemSelect={(item) => {}}
                 containerStyle={styles.dropdownContainer}
                 itemStyle={styles.item}
@@ -46,7 +70,7 @@ const AddNewAssetScreen = () => {
                     </View>
                 </View>
                 <TouchableOpacity activeOpacity={0.7} className="absolute bottom-6 w-full mx-4 flex-row items-center justify-center py-3 bg-blue-600 rounded-md"
-                                  onPress={() => navigation.navigate("AddNewAssetScreen")}
+                                  onPress={onAddNewAsset}
                 >
                     <Text className="text-white font-bold">Add New Asset</Text>
                 </TouchableOpacity>
