@@ -20,6 +20,10 @@ const WatchlistScreen = () => {
         setLoading(false);
     }
 
+    //
+    // useEffect(() => {
+    //     fetchWatchlistedCoins();
+    // }, []);
 
     useEffect(() => {
         fetchWatchlistedCoins();
