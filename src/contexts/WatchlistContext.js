@@ -33,14 +33,10 @@ export const WatchlistProvider = ({ children }) => {
     }
 
     const removeWatchlistCoinId = async (coinId) => {
-        try {
-            const newWatchlist = watchlistCoinIds.filter((coinIdValue) => coinIdValue !== coinId);
-            const jsonValue = JSON.stringify(newWatchlist);
-            await AsyncStorage.setItem('@watchlist_coins', jsonValue);
-            setWatchlistCoinIds(newWatchlist);
-        } catch (error) {
-            console.log(error);
-        }
+        const newWatchlist = watchlistCoinIds.filter((coinIdValue) => coinIdValue !== coinId);
+        const jsonValue = JSON.stringify(newWatchlist);
+        await AsyncStorage.setItem('@watchlist_coins', jsonValue);
+        setWatchlistCoinIds(newWatchlist);
     }
 
     return (
