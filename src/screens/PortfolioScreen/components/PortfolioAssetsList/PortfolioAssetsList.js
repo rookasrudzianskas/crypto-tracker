@@ -42,7 +42,7 @@ const PortfolioAssetsList = () => {
                     <View className="mt-2 flex-row justify-between">
                         <View>
                             <Text className="text-4xl tracking-wider font-[600] text-white">{getCurrentBalance() || 0}$</Text>
-                            <Text className="text-green-700 font-[500] tracking-wider">${getCurrentValueChange() || 0} (All time)</Text>
+                            <Text className={`${getCurrentPercentageChange() ? 'text-green-700' : 'text-red-700'} font-[500] tracking-wider`}>${getCurrentValueChange() || 0} (All time)</Text>
                         </View>
                         <View>
                             <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${getCurrentPercentageChange() > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
