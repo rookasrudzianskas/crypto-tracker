@@ -13,7 +13,17 @@ const PortfolioAssetItem = ({ assetItem }) => {
         ticker,
     } = assetItem;
 
-    const price_change_percentage_24h = 0.5;
+    const normalizePrice = (price) => {
+        if (price >= 1000000000) {
+            return `${(price / 1000000000).toFixed(2)}B`;
+        } else if (price >= 1000000) {
+            return `${(price / 1000000).toFixed(2)}M`;
+        } else {
+            return `${(price / 1000).toFixed(2)}K`;
+        }
+    }
+
+    const renderHoldings = () => normalizePrice(currentPrice * quantityBought);
     // 'bg-[#3cbd48]' : 'bg-[#FF4B4B]
     return (
         <TouchableOpacity activeOpacity={0.7} className="mx-4">
@@ -26,7 +36,7 @@ const PortfolioAssetItem = ({ assetItem }) => {
                    </View>
                </View>
                <View className="flex-col">
-                   <Text className="text-white font-bold text-[17px] mb-[1px]">${currentPrice?.toFixed(2) || 0}</Text>
+                   <Text className="text-white font-bold text-[17px] mb-[1px]">${currentPrice.toFixed(1) || 0}</Text>
                    <View>
                        <TouchableOpacity className={`flex-row items-center space-x-1`} activeOpacity={0.7}>
                            {priceChangePercentage && priceChangePercentage > 0 ? (
@@ -39,7 +49,7 @@ const PortfolioAssetItem = ({ assetItem }) => {
                    </View>
                </View>
                <View>
-                   <Text className="text-white font-bold text-[17px]">${(currentPrice * quantityBought)?.toFixed(2) || 0}</Text>
+                   <Text className="text-white font-bold text-[17px] text-right">${renderHoldings() || 0}</Text>
                    <Text className="text-gray-500 font-semibold text-[14px] text-right">{quantityBought || NaN} {ticker?.toUpperCase() || 'Loading..'}</Text>
                </View>
            </View>
