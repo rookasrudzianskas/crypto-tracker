@@ -7,6 +7,10 @@ import PortfolioAssetItem from "../PortfolioAssetItem";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {allPortfolioAssets, allPortfolioBoughtAssetsInStorage} from "../../../../atoms/PortfolioAssets";
 import {SwipeListView} from "react-native-swipe-list-view";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Sending...']);
 
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
@@ -35,8 +39,11 @@ const PortfolioAssetsList = () => {
     }
 
     const onDeleteAsset = async (asset) => {
-        const newAssets = storageAssets.filter((coin) => coin.unique_id !== asset.item.unique_id);
-    }
+        const newAssets = storageAssets.filter((coin, index) => index !== asset.index);
+        const jsonValue = JSON.stringify(newAssets);
+        await AsyncStorage.setItem("@portfolio_coins", jsonValue)
+        setStorageAssets(newAssets);
+    };
 
     const renderDeleteButton = (data) => {
         return (
@@ -63,6 +70,7 @@ const PortfolioAssetsList = () => {
             rightOpenValue={-75}
             disableRightSwipe
             closeOnRowPress
+            inlineRequires={true}
             renderHiddenItem={(data) => renderDeleteButton(data)}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
