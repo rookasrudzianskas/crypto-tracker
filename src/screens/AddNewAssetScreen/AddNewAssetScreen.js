@@ -14,7 +14,7 @@ const AddNewAssetScreen = () => {
                         <TextInput keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
                         <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">BTC</Text>
                     </View>
-                    <View className="items-center justify-center">
+                    <View className="items-center justify-center mt-2">
                         <Text className="text-gray-500 font-bold tracking-wider">47018.00$ per coin</Text>
                     </View>
                 </View>
