@@ -6,6 +6,7 @@ import SearchableDropdown from "react-native-searchable-dropdown";
 import {useRecoilState} from "recoil";
 import {allPortfolioBoughtAssetsInStorage} from "../../atoms/PortfolioAssets";
 import {getAllCoins, getDetailedCoinData} from "../../services/requests";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AddNewAssetScreen = () => {
     const navigation = useNavigation();
@@ -47,17 +48,6 @@ const AddNewAssetScreen = () => {
         }
     }, [selectedCoinId]);
 
-    const onAddNewAsset = () => {
-        const newAsset = {
-            id: selectedCoin.id,
-            name: selectedCoin.name,
-            image: selectedCoin.image.small,
-            ticker: selectedCoin.symbol.toUpperCase(),
-            quantityBought: parseFloat(boughtAssetQuantity),
-            priceBought: selectedCoin.market_data.current_price.usd,
-        }
-    }
-
     if(loading || !allCoins) {
         return (
             <View className="h-screen items-center justify-center">
@@ -67,6 +57,22 @@ const AddNewAssetScreen = () => {
     }
 
     const {symbol, market_data: { current_price }} = selectedCoin;
+
+    const onAddNewAsset = async () => {
+        const newAsset = {
+            id: selectedCoin.id,
+            name: selectedCoin.name,
+            image: selectedCoin.image.small,
+            ticker: selectedCoin.symbol.toUpperCase(),
+            quantityBought: parseFloat(boughtAssetQuantity),
+            priceBought: current_price.usd,
+        }
+        const newAssets = [...assetsInStorage, newAsset];
+        const jsonValue = JSON.stringify(newAssets);
+        await AsyncStorage.setItem("@portfolio_coins", jsonValue);
+        setAssetsInStorage(newAssets);
+        navigation.goBack();
+    }
 
     return (
         <View className="mx-4">
