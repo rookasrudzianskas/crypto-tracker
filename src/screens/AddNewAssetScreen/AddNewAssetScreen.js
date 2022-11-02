@@ -19,6 +19,14 @@ const AddNewAssetScreen = () => {
         allPortfolioBoughtAssetsInStorage
     );
 
+    const isQuantityEntered = () => boughtAssetQuantity === "";
+    console.log(isQuantityEntered())
+
+    useEffect(() => {
+        console.log(boughtAssetQuantity, "- bought asset quantity")
+        console.log(isQuantityEntered())
+    }, [isQuantityEntered()])
+
     const fetchAllCoins = async () => {
         if(loading) return;
         setLoading(true);
@@ -61,19 +69,23 @@ const AddNewAssetScreen = () => {
                 }}
             />
             <View className="h-[90%] items-center">
-                <View className="mt-16">
-                    <View className="flex-row items-center justify-center">
-                        <TextInput value={boughtAssetQuantity} onChangeText={(text) => setBoughtAssetQuantity(text)} keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
-                        <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">BTC</Text>
+                {selectedCoinId && (
+                    <View className="mt-16">
+                        <View className="flex-row items-center justify-center">
+                            <TextInput value={boughtAssetQuantity} onChangeText={setBoughtAssetQuantity}
+                                       keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
+                            <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">BTC</Text>
+                        </View>
+                        <View className="items-center justify-center mt-2">
+                            <Text className="text-gray-500 font-bold tracking-wider">47018.00$ per coin</Text>
+                        </View>
                     </View>
-                    <View className="items-center justify-center mt-2">
-                        <Text className="text-gray-500 font-bold tracking-wider">47018.00$ per coin</Text>
-                    </View>
-                </View>
-                <TouchableOpacity activeOpacity={0.7} className="absolute bottom-6 w-full mx-4 flex-row items-center justify-center py-3 bg-blue-600 rounded-md"
+                )}
+                <TouchableOpacity activeOpacity={0.7} className={`absolute bottom-6 w-full mx-4 flex-row items-center justify-center py-3 ${isQuantityEntered() ? 'bg-blue-600' : 'bg-gray-600'} rounded-md`}
+                                  disabled={!isQuantityEntered()}
                                   onPress={onAddNewAsset}
                 >
-                    <Text className="text-white font-bold">Add New Asset</Text>
+                    <Text className={`text-white font-bold`}>Add New Asset</Text>
                 </TouchableOpacity>
             </View>
         </View>
