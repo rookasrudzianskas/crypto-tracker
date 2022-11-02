@@ -78,8 +78,6 @@ const AddNewAssetScreen = () => {
         )
     }
 
-    // const {symbol, market_data: { current_price }} = selectedCoin;
-
     return (
         <View className="mx-4">
             <SearchableDropdown
