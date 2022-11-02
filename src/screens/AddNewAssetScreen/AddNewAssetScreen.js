@@ -8,6 +8,7 @@ import {allPortfolioBoughtAssetsInStorage} from "../../atoms/PortfolioAssets";
 import {getAllCoins, getDetailedCoinData} from "../../services/requests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {LogBox} from "react-native";
+import uuid from 'react-native-uuid';
 
 // Not the best solution, but it works
 LogBox.ignoreLogs(['Please report: Excessive number of pending callbacks:']);
@@ -57,6 +58,7 @@ const AddNewAssetScreen = () => {
         if(!selectedCoin) return;
         const newAsset = {
             id: selectedCoin.id,
+            unique_id: selectedCoin.id + uuid.v4(),
             name: selectedCoin.name,
             image: selectedCoin.image.small,
             ticker: selectedCoin?.symbol?.toUpperCase(),
