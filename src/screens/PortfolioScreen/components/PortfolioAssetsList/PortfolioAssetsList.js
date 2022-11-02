@@ -3,14 +3,15 @@ import React from 'react';
 import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
+import PortfolioAssetItem from "../PortfolioAssetItem";
 
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
     const price_change_percentage_24h = 0.5;
     return (
         <FlatList
-            data={[]}
-            renderItem={() => {}}
+            data={[1, 2, 3, 4]}
+            renderItem={({item}) => <PortfolioAssetItem assetItem={item} />}
             ListHeaderComponent={
                 <View className="pt-16 mx-4">
                     <View>
