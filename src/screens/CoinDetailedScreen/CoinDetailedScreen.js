@@ -23,7 +23,6 @@ const CoinDetailedScreen = () => {
     const [usdValue, setUsdValue] = useState("0.00");
     const [selectedRange, setSelectedRange] = useState("1");
 
-    const nf = Intl.NumberFormat();
     const route = useRoute();
     const { coinId } = route.params;
 
@@ -34,19 +33,6 @@ const CoinDetailedScreen = () => {
         { filterDay: "365", filterText: "1y" },
         { filterDay: "max", filterText: "All" },
     ];
-
-    // useEffect(() => {
-    //     (async () => {
-    //         setLoading(true);
-    //         const fetchedCoinData = await getDetailedCoinData(coinId);
-    //         const fetchedCoinMarketData = await getCoinMarketChart(coinId);
-    //         setCoin(fetchedCoinData);
-    //         setCoinMarketData(fetchedCoinMarketData);
-    //         setUsdValue(fetchedCoinData?.market_data?.current_price?.usd.toString());
-    //         fetchMarketCoinData(1);
-    //         setLoading(false);
-    //     })();
-    // }, []);
 
     const fetchCoinData = async () => {
         setLoading(true);
