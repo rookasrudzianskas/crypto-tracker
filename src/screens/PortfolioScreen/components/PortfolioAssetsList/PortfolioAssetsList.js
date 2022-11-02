@@ -10,7 +10,6 @@ import {allPortfolioAssets} from "../../../../atoms/PortfolioAssets";
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
     const assets = useRecoilValue(allPortfolioAssets);
-    const price_change_percentage_24h = 0.5;
 
     const getCurrentBalance = () =>
         assets.reduce(
