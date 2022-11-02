@@ -25,6 +25,10 @@ export const allPortfolioBoughtAssetsFromAPI = selector({
                 priceChangePercentage: portfolioAsset.price_change_percentage_24h
             }
         })
+
+        return boughtAssets.sort((item1, item2) =>
+            (item1.quantityBought * item1.currentPrice) < (item2.quantityBought * item2.currentPrice));
+
     }
 })
 
