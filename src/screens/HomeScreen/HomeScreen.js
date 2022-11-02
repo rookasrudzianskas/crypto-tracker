@@ -32,7 +32,9 @@ const HomeScreen = () => {
         <View className=" pt-16">
             <View>
                 <View className="mx-4">
-                    <Text style={{ fontFamily: 'Inter_900Black' }} className="text-3xl font-bold text-white tracking-wider mb-2">Crypto assets</Text>
+                    <Text
+                        // style={{ fontFamily: 'Inter_900Black' }}
+                        className="text-3xl font-bold text-white tracking-wider mb-2">Crypto assets</Text>
                 </View>
             </View>
             <View>
