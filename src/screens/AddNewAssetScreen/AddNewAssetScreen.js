@@ -48,6 +48,23 @@ const AddNewAssetScreen = () => {
         }
     }, [selectedCoinId]);
 
+    const onAddNewAsset = async () => {
+        if(!selectedCoin) return;
+        const newAsset = {
+            id: selectedCoin.id,
+            name: selectedCoin.name,
+            image: selectedCoin.image.small,
+            ticker: selectedCoin?.symbol?.toUpperCase(),
+            quantityBought: parseFloat(boughtAssetQuantity),
+            priceBought: selectedCoin.market_data.current_price.usd,
+        }
+        const newAssets = [...assetsInStorage, newAsset];
+        const jsonValue = JSON.stringify(newAssets);
+        await AsyncStorage.setItem("@portfolio_coins", jsonValue);
+        setAssetsInStorage(newAssets);
+        navigation.goBack();
+    }
+
     if(loading || !allCoins) {
         return (
             <View className="h-screen items-center justify-center">
@@ -56,23 +73,7 @@ const AddNewAssetScreen = () => {
         )
     }
 
-    const {symbol, market_data: { current_price }} = selectedCoin;
-
-    const onAddNewAsset = async () => {
-        const newAsset = {
-            id: selectedCoin.id,
-            name: selectedCoin.name,
-            image: selectedCoin.image.small,
-            ticker: selectedCoin.symbol.toUpperCase(),
-            quantityBought: parseFloat(boughtAssetQuantity),
-            priceBought: current_price.usd,
-        }
-        const newAssets = [...assetsInStorage, newAsset];
-        const jsonValue = JSON.stringify(newAssets);
-        await AsyncStorage.setItem("@portfolio_coins", jsonValue);
-        setAssetsInStorage(newAssets);
-        navigation.goBack();
-    }
+    // const {symbol, market_data: { current_price }} = selectedCoin;
 
     return (
         <View className="mx-4">
@@ -103,10 +104,10 @@ const AddNewAssetScreen = () => {
                         <View className="flex-row items-center justify-center">
                             <TextInput value={boughtAssetQuantity} onChangeText={setBoughtAssetQuantity}
                                        keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
-                            <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">{symbol || 'Loading...'}</Text>
+                            <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">{selectedCoin?.symbol || 'Loading...'}</Text>
                         </View>
                         <View className="items-center justify-center mt-2">
-                            <Text className="text-gray-500 font-bold tracking-wider">${current_price?.usd || 'Loading...'} per coin</Text>
+                            <Text className="text-gray-500 font-bold tracking-wider">${selectedCoin?.market_data?.current_price?.usd || 'Loading...'} per coin</Text>
                         </View>
                     </View>
                 )}
