@@ -67,4 +67,4 @@ const CoinItem = ({marketCoin, index}) => {
     );
 };
 
-export default memo(CoinItem);
+export default CoinItem;

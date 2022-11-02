@@ -26,6 +26,10 @@ const WatchlistScreen = () => {
         }
     }, [watchlistCoinIds]);
 
+    useEffect(() => {
+        fetchWatchlistedCoins();
+    }, []);
+
     if(loading || !coins) {
         return (
             <View className="h-screen justify-center items-center">
@@ -39,7 +43,7 @@ const WatchlistScreen = () => {
             <FlatList
                 style={{height:  '100%'}}
                 data={coins}
-                renderItem={_renderitem}
+                renderItem={({item, index}) => <CoinItem marketCoin={item} index={index} />}
                 refreshControl={
                     <RefreshControl
                         refreshing={loading}
@@ -51,7 +55,5 @@ const WatchlistScreen = () => {
         </View>
     );
 };
-
-const _renderitem = ({item, index}) => <CoinItem marketCoin={item} index={index} />
 
 export default WatchlistScreen;
