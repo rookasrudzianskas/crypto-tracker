@@ -9,8 +9,21 @@ import {allPortfolioAssets} from "../../../../atoms/PortfolioAssets";
 
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
-    const price_change_percentage_24h = 0.5;
     const assets = useRecoilValue(allPortfolioAssets);
+    const price_change_percentage_24h = 0.5;
+
+    const getCurrentBalance = () =>
+        assets.reduce(
+            (total, currentAsset) =>
+                total + currentAsset.currentPrice * currentAsset.quantityBought,
+            0
+        );
+
+    const getCurrentValueChange = () => {
+        const currentBalance = getCurrentBalance();
+        const boughtBalance = assets.reduce((total, currentAsset) => total + currentAsset.priceBought * currentAsset.quantityBought, 0);
+        return (currentBalance - boughtBalance).toFixed(2);
+    }
 
     return (
         <FlatList
@@ -23,8 +36,8 @@ const PortfolioAssetsList = () => {
                     </View>
                     <View className="mt-2 flex-row justify-between">
                         <View>
-                            <Text className="text-4xl tracking-wider font-[600] text-white">25430.22$</Text>
-                            <Text className="text-green-700 font-[500] tracking-wider">$99.00 (All time)</Text>
+                            <Text className="text-4xl tracking-wider font-[600] text-white">{getCurrentBalance() || 0}$</Text>
+                            <Text className="text-green-700 font-[500] tracking-wider">${getCurrentValueChange() || 0} (All time)</Text>
                         </View>
                         <View>
                             <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${price_change_percentage_24h && price_change_percentage_24h > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
