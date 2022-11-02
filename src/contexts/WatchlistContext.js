@@ -21,6 +21,14 @@ export const WatchlistProvider = ({ children }) => {
         getWatchlistData();
     }, []);
 
+    const storeWatchlistCoinId = async (coinId) => {
+        try {
+            const newWatchlist = [...watchlistCoinIds, coinId];
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <WatchlistContext.Provider value={{
             watchlistCoinIds,
