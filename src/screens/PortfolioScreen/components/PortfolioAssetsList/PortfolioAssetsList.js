@@ -31,6 +31,9 @@ const PortfolioAssetsList = () => {
         return (((currentBalance - boughtBalance) / boughtBalance) * 100).toFixed(2) || 0;
     }
 
+    const onDeleteAsset = async (asset) => {
+
+    }
 
     const renderDeleteButton = (data) => {
         return (
@@ -40,10 +43,10 @@ const PortfolioAssetsList = () => {
                     backgroundColor: "#EA3943",
                     alignItems: "flex-end",
                     justifyContent: "center",
-                    paddingRight: 30,
-                    marginHorizontal: 20,
+                    paddingRight: 25,
+                    marginHorizontal: 10,
                 }}
-                // onPress={() => onDeleteAsset(data)}
+                onPress={() => onDeleteAsset(data)}
             >
                 <FontAwesome name="trash-o" size={22} color="white" />
             </Pressable>
@@ -56,6 +59,7 @@ const PortfolioAssetsList = () => {
             renderItem={({item}) => <PortfolioAssetItem assetItem={item} />}
             rightOpenValue={-75}
             disableRightSwipe
+            closeOnRowPress
             renderHiddenItem={(data) => renderDeleteButton(data)}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
@@ -87,7 +91,7 @@ const PortfolioAssetsList = () => {
                 </View>
             }
             ListFooterComponent={
-                <TouchableOpacity activeOpacity={0.7} className=" mx-8 flex-row items-center justify-center py-3 bg-blue-600 rounded-md"
+                <TouchableOpacity activeOpacity={0.7} className=" mx-4 flex-row items-center justify-center py-3 bg-blue-600 rounded-md"
                     onPress={() => navigation.navigate("AddNewAssetScreen")}
                 >
                     <Text className="text-white font-bold">Add New Asset</Text>

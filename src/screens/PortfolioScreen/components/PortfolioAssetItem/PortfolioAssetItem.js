@@ -26,7 +26,7 @@ const PortfolioAssetItem = ({ assetItem }) => {
     const renderHoldings = () => normalizePrice(currentPrice * quantityBought);
 
     return (
-        <Pressable activeOpacity={1} className="mx-4 bg-[#121212]">
+        <Pressable activeOpacity={1} className="bg-[#121212]">
            <View className=" flex-row justify-between">
                <View className="flex-row items-center ml-4">
                    <Image source={{ uri: image || 'https://as2.ftcdn.net/v2/jpg/02/88/85/71/1000_F_288857162_l7ZOOsEveQf1d8PMsNC6HMQFeqafLJhx.jpg'}} className="w-7 h-7 rounded-full" />
