@@ -11,6 +11,7 @@ import {LogBox} from "react-native";
 
 // Not the best solution, but it works
 LogBox.ignoreLogs(['Please report: Excessive number of pending callbacks:']);
+// Ignore the errors on this screen, it's not finished yet
 
 const AddNewAssetScreen = () => {
     const navigation = useNavigation();
