@@ -19,14 +19,20 @@ const CoinItem = ({marketCoin, index}) => {
     const navigation = useNavigation();
 
     const normalizeMarketCap = (marketCap) => {
-        if (marketCap >= 1000000000) {
-            return `${(marketCap / 1000000000).toFixed(2)}B`;
-        } else if (marketCap >= 1000000) {
-            return `${(marketCap / 1000000).toFixed(2)}M`;
-        } else {
-            return `${(marketCap / 1000).toFixed(2)}K`;
+        if (marketCap > 1e12) {
+            return `${(marketCap / 1e12).toFixed(3)} T`;
         }
-    }
+        if (marketCap > 1e9) {
+            return `${(marketCap / 1e9).toFixed(3)} B`;
+        }
+        if (marketCap > 1e6) {
+            return `${(marketCap / 1e6).toFixed(3)} M`;
+        }
+        if (marketCap > 1e3) {
+            return `${(marketCap / 1e3).toFixed(3)} K`;
+        }
+        return marketCap;
+    };
 
     return (
         <TouchableOpacity onPress={() => navigation.navigate('CoinDetailedScreen', { coinId: id})} className="mx-4 my-2" activeOpacity={0.7}>
@@ -53,7 +59,7 @@ const CoinItem = ({marketCoin, index}) => {
                 </View>
                 <View className="">
                     <Text className="text-xl font-bold text-white text-right">{current_price?.toFixed(2) || 0}</Text>
-                    <Text className="font-bold text-gray-400/90 text-[15px] mt-1">MCap {normalizeMarketCap(market_cap)} T</Text>
+                    <Text className="font-bold text-gray-400/90 text-[15px] mt-1">MCap {normalizeMarketCap(market_cap)}</Text>
                 </View>
             </View>
             <View className="border-b border-gray-900 mt-2"/>
