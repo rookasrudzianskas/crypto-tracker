@@ -41,7 +41,7 @@ const PortfolioAssetsList = () => {
                     </View>
                     <View className="mt-2 flex-row justify-between">
                         <View>
-                            <Text className="text-4xl tracking-wider font-[600] text-white">{getCurrentBalance() || 0}$</Text>
+                            <Text className="text-4xl tracking-wider font-[600] text-white">{getCurrentBalance().toFixed(2) || 0}$</Text>
                             <Text className={`${getCurrentPercentageChange() ? 'text-green-700' : 'text-red-700'} font-[500] tracking-wider`}>${getCurrentValueChange() || 0} (All time)</Text>
                         </View>
                         <View>
