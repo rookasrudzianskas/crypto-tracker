@@ -61,7 +61,7 @@ const CoinDetailedScreen = () => {
     const { prices } = coinMarketData;
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
 
-        const formatCurrency = (value) => {
+    const formatCurrency = (value) => {
         "worklet";
         if (value === "") {
             if(usd < 1) {
@@ -69,9 +69,9 @@ const CoinDetailedScreen = () => {
             }
             return `$${usd.toFixed(2)}`;
         }
-            if(usd < 1) {
-                return `$${parseFloat(value)}`;
-            }
+        if(usd < 1) {
+           return `$${parseFloat(value)}`;
+        }
         return `$${parseFloat(value).toFixed(2)}`;
     }
 
