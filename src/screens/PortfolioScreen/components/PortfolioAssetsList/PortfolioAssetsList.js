@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import PortfolioAssetItem from "../PortfolioAssetItem";
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilValue} from "recoil";
 import {allPortfolioAssets} from "../../../../atoms/PortfolioAssets";
 
 const PortfolioAssetsList = () => {
