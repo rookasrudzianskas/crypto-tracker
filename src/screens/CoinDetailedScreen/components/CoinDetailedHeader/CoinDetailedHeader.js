@@ -11,7 +11,6 @@ const CoinDetailedHeader = ({coinId, name}) => {
 
     const checkIfCoinIsWatchlisted = () => watchlistCoinIds.some((coinIdValue) => coinIdValue === coinId);
 
-
     return (
         <View className="mx-4">
             <View className="flex-row items-center">
@@ -22,7 +21,7 @@ const CoinDetailedHeader = ({coinId, name}) => {
                     <Text className="text-white text-lg font-semibold">{name || 'Loading...'}</Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.7}>
-                    {checkIfCoinIsWatchlisted ? (
+                    {checkIfCoinIsWatchlisted() ? (
                         <FontAwesome name="star" size={22} color="#FFD700" />
                     ) : (
                         <FontAwesome name="star-o" size={22} color="white" />
