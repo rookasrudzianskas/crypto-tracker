@@ -2,8 +2,10 @@
 import React from 'react';
 import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {FontAwesome} from "@expo/vector-icons";
+import {useNavigation} from "@react-navigation/native";
 
 const PortfolioAssetsList = () => {
+    const navigation = useNavigation();
     const price_change_percentage_24h = 0.5;
     return (
         <FlatList
@@ -34,6 +36,13 @@ const PortfolioAssetsList = () => {
                         <Text className="text-white font-[600] text-2xl">Your Assets</Text>
                     </View>
                 </View>
+            }
+            ListFooterComponent={
+                <TouchableOpacity activeOpacity={0.7} className=" mx-4 flex-row items-center justify-center py-3 bg-blue-600 rounded-md"
+                    onPress={() => navigation.navigate("AddNewAssetScreen")}
+                >
+                    <Text className="text-white font-bold">Add New Asset</Text>
+                </TouchableOpacity>
             }
         />
     );
