@@ -4,13 +4,16 @@ import {Text, View, StyleSheet, FlatList, TouchableOpacity, Pressable} from 'rea
 import {FontAwesome} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import PortfolioAssetItem from "../PortfolioAssetItem";
-import {useRecoilValue} from "recoil";
-import {allPortfolioAssets} from "../../../../atoms/PortfolioAssets";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {allPortfolioAssets, allPortfolioBoughtAssetsInStorage} from "../../../../atoms/PortfolioAssets";
 import {SwipeListView} from "react-native-swipe-list-view";
 
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
     const assets = useRecoilValue(allPortfolioAssets);
+    const [storageAssets, setStorageAssets] = useRecoilState(
+        allPortfolioBoughtAssetsInStorage
+    );
 
     const getCurrentBalance = () =>
         assets.reduce(
@@ -32,7 +35,7 @@ const PortfolioAssetsList = () => {
     }
 
     const onDeleteAsset = async (asset) => {
-
+        const newAssets = storageAssets.filter((coin) => coin.unique_id !== asset.item.unique_id);
     }
 
     const renderDeleteButton = (data) => {
