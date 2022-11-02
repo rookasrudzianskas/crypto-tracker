@@ -45,7 +45,13 @@ const CoinDetailedScreen = () => {
             setUsdValue(fetchedCoinData?.market_data?.current_price?.usd.toString());
             setLoading(false);
         })();
+        fetchMarketCoinData(1);
     }, []);
+
+    const fetchMarketCoinData = async (selectedRangeValue) => {
+        const fetchedCoinMarketData = await getCoinMarketChart(coinId, selectedRangeValue);
+        setCoinMarketData(fetchedCoinMarketData);
+    }
 
     if(loading || !coin || !coinMarketData) {
         return (
@@ -99,7 +105,7 @@ const CoinDetailedScreen = () => {
 
     const onSelectedRangeChange = (selectedRangeValue) => {
         setSelectedRange(selectedRangeValue);
-        // fetchMarketCoinData(selectedRangeValue);
+        fetchMarketCoinData(selectedRangeValue);
     };
 
     return (
