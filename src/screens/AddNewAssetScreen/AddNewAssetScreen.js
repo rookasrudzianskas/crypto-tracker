@@ -7,6 +7,9 @@ import {useRecoilState} from "recoil";
 import {allPortfolioBoughtAssetsInStorage} from "../../atoms/PortfolioAssets";
 import {getAllCoins, getDetailedCoinData} from "../../services/requests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {LogBox} from "react-native";
+
+LogBox.ignoreLogs(['Please report: Excessive number of pending callbacks:']);
 
 const AddNewAssetScreen = () => {
     const navigation = useNavigation();
