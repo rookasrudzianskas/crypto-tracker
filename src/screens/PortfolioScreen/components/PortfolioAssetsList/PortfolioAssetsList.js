@@ -39,7 +39,7 @@ const PortfolioAssetsList = () => {
     }
 
     const onDeleteAsset = async (asset) => {
-        console.log('Deleting asset', asset);
+        // console.log('Deleting asset', asset);
         const newAssets = storageAssets.filter((coin, index) => coin !== asset.item);
         const jsonValue = JSON.stringify(newAssets);
         await AsyncStorage.setItem("@portfolio_coins", jsonValue)
