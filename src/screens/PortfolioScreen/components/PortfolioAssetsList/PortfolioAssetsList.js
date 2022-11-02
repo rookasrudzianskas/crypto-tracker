@@ -8,6 +8,9 @@ import PortfolioAssetItem from "../PortfolioAssetItem";
 const PortfolioAssetsList = () => {
     const navigation = useNavigation();
     const price_change_percentage_24h = 0.5;
+
+
+
     return (
         <FlatList
             data={[1, 2, 3, 4]}
