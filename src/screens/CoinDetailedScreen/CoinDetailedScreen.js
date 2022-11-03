@@ -61,8 +61,9 @@ const CoinDetailedScreen = () => {
 
     if(
         loading ||
-        // !coin ||
-        !coinMarketData) {
+        !coin ||
+        !coinMarketData
+    ) {
         // console.log("Loading...", loading);
         // console.log("Coin", coin);
         // console.log("CoinMarketData", coinMarketData);
