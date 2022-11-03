@@ -89,7 +89,7 @@ const AddNewAssetScreen = () => {
     }
 
     return (
-        <KeyboardAvoidingView style={{ flex: 1 }} keyboardVerticalOffset={80} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <KeyboardAvoidingView style={{ flex: 1 }} keyboardVerticalOffset={100} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <View className="mx-4">
                 <SearchableDropdown
                     items={allCoins}
