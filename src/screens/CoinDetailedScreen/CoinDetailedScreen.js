@@ -173,7 +173,7 @@ const CoinDetailedScreen = () => {
                                     filterDay={day.filterDay}
                                     filterText={day.filterText}
                                     selectedRange={selectedRange}
-                                    setSelectedRange={onSelectedRangeChange}
+                                    setSelectedRange={memoOnSelectedRangeChange}
                                     key={day.filterText}
                                 />
                             ))}
