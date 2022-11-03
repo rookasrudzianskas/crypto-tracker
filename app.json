@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "crypto-tracker",
-    "slug": "crypto-tracker",
+    "name": "Guaco Tracker",
+    "slug": "guacoTracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.rooookas.guacoTracker",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -28,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c40b6a5b-2504-4335-ad71-63505ce6f0ac"
+      }
     }
   }
 }
