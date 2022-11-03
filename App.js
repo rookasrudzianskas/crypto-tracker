@@ -12,6 +12,7 @@ import {
 } from 'recoil';
 import {useFonts} from "expo-font";
 import {Inter_900Black} from "@expo-google-fonts/inter";
+import 'react-native-gesture-handler';
 
 export default function App() {
     let [fontsLoaded] = useFonts({

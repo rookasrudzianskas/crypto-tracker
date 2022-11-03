@@ -116,12 +116,32 @@ const CoinDetailedScreen = () => {
         fetchMarketCoinData(selectedRangeValue);
     };
 
+    const data = [
+        {
+            timestamp: 1625945400000,
+            value: 33575.25,
+        },
+        {
+            timestamp: 1625946300000,
+            value: 33545.25,
+        },
+        {
+            timestamp: 1625947200000,
+            value: 33510.25,
+        },
+        {
+            timestamp: 1625948100000,
+            value: 33215.25,
+        },
+    ];
+
+
+    // prices.map(([timestamp, value]) => ({ timestamp, value }))
     return (
         <View className="pt-12">
-            <LineChart.Provider
-                data={prices.map(([timestamp, value]) => ({ timestamp, value }))}
-            >
-                <CoinDetailedHeader
+            <LineChart.Provider data={[]}>
+
+            <CoinDetailedHeader
                     coinId={id}
                     image={small}
                     name={name}
@@ -132,7 +152,8 @@ const CoinDetailedScreen = () => {
                 />
 
                 <View className="flex-row items-center justify-between mx-4">
-                    <ChartYLabel format={formatCurrency} style={styles.currentPrice} />
+                    {/*<ChartYLabel format={formatCurrency} style={styles.currentPrice} />*/}
+                    <Text style={styles.currentPrice}>20222.00</Text>
                     <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${price_change_percentage_24h && price_change_percentage_24h > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
                         {price_change_percentage_24h > 0 ? (
                             <FontAwesome name="caret-up" style={{marginBottom: 2}} size={20} color="white" />
@@ -160,6 +181,10 @@ const CoinDetailedScreen = () => {
                             ))}
                     </View>
                 </View>
+
+                <LineChart>
+                    <LineChart.Path />
+                </LineChart>
 
                 <View className="bg-gray-800 py-4 mx-4 rounded-lg">
                     <View className="flex-row items-center justify-around">

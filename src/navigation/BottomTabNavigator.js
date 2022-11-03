@@ -4,6 +4,7 @@ import {Entypo, FontAwesome, Foundation} from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import WatchlistScreen from "../screens/WatchlistScreen";
 import PortfolioScreen from "../screens/PortfolioScreen";
+import TestScreen from "../screens/TestScreen/TestScreen";
 
 
 const Tab = createBottomTabNavigator();
