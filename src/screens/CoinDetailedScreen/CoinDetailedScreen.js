@@ -152,8 +152,6 @@ const CoinDetailedScreen = () => {
         },
     ];
 
-
-    // prices.map(([timestamp, value]) => ({ timestamp, value }))
     return (
         <View className="pt-12">
             <LineChart.Provider data={prices.map(([timestamp, value]) => ({ timestamp, value }))}>
