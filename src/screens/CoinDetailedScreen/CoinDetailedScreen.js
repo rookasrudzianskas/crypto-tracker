@@ -12,6 +12,7 @@ import CoinSelectedFeatures from "./components/CoinSelectedFeatures";
 import {useRoute} from "@react-navigation/native";
 import {getCoinMarketChart, getDetailedCoinData} from "../../services/requests";
 import FilterComponent from "./components/FilterComponent";
+import { LineChart, CandlestickChart } from "react-native-wagmi-charts";
 
 const CoinDetailedScreen = () => {
     const [coin, setCoin] = useState(null);
@@ -117,11 +118,8 @@ const CoinDetailedScreen = () => {
 
     return (
         <View className="pt-12">
-            <ChartPathProvider
-                data={{
-                    points: prices.map(([x, y]) => ({ x, y })),
-                    smoothingStrategy: "bezier",
-                }}
+            <LineChart.Provider
+                data={prices.map(([timestamp, value]) => ({ timestamp, value }))}
             >
                 <CoinDetailedHeader
                     coinId={id}
@@ -163,16 +161,6 @@ const CoinDetailedScreen = () => {
                     </View>
                 </View>
 
-                <ChartPath
-                    strokeWidth={2}
-                    height={screenWidth / 2}
-                    stroke={chartColor}
-                    width={screenWidth}
-                />
-                <View>
-                    <ChartDot style={{ backgroundColor: chartColor }} />
-                </View>
-
                 <View className="bg-gray-800 py-4 mx-4 rounded-lg">
                     <View className="flex-row items-center justify-around">
                         <Text className="text-white font-bold">BTC</Text>
@@ -186,7 +174,7 @@ const CoinDetailedScreen = () => {
 
                 {/*<CoinDetailFooter /> @FIXME do the footer */}
 
-                </ChartPathProvider>
+            </LineChart.Provider>
         </View>
     );
 };
