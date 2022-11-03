@@ -85,19 +85,20 @@ const CoinDetailedScreen = () => {
     const { prices } = cryptoCurrencyData; // coinMarketData;
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
 
-    const formatCurrency = (value) => {
+    const formatCurrency = ({ value }) => {
         "worklet";
         if (value === "") {
-            if(usd < 1) {
+            if (usd < 1) {
                 return `$${usd}`;
             }
             return `$${usd.toFixed(2)}`;
         }
-        if(usd < 1) {
-           return `$${parseFloat(value)}`;
+        if (usd < 1) {
+            return `$${parseFloat(value)}`;
         }
         return `$${parseFloat(value).toFixed(2)}`;
-    }
+    };
+
 
     const changeCoinValue = (value) => {
         setCoinValue(value);
@@ -153,7 +154,11 @@ const CoinDetailedScreen = () => {
 
                 <View className="flex-row items-center justify-between mx-4">
                     {/*<ChartYLabel format={formatCurrency} style={styles.currentPrice} />*/}
-                    <Text style={styles.currentPrice}>20222.00</Text>
+                    {/*<Text style={styles.currentPrice}>20222.00</Text>*/}
+                    <LineChart.PriceText
+                        format={formatCurrency}
+                        style={styles.currentPrice}
+                    />
                     <TouchableOpacity className={`flex-row items-center space-x-1 mt-2 ${price_change_percentage_24h && price_change_percentage_24h > 0 ? 'bg-[#3cbd48]' : 'bg-[#FF4B4B]'} px-3 py-2 rounded-md`} activeOpacity={0.7}>
                         {price_change_percentage_24h > 0 ? (
                             <FontAwesome name="caret-up" style={{marginBottom: 2}} size={20} color="white" />
