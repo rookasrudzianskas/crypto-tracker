@@ -52,18 +52,18 @@ const CoinDetailedScreen = () => {
         setCoinMarketData(fetchedCoinMarketData);
     };
 
-    useEffect(() => {
-        fetchCoinData();
-        fetchMarketCoinData(1);
-    }, []);
-
-    if(loading || !coin || !coinMarketData) {
-        return (
-            <View className="h-screen justify-center items-center">
-                <ActivityIndicator />
-            </View>
-        );
-    }
+    // useEffect(() => {
+    //     fetchCoinData();
+    //     fetchMarketCoinData(1);
+    // }, []);
+    //
+    // if(loading || !coin || !coinMarketData) {
+    //     return (
+    //         <View className="h-screen justify-center items-center">
+    //             <ActivityIndicator />
+    //         </View>
+    //     );
+    // }
 
     const {image: { small },
         id,
@@ -76,9 +76,12 @@ const CoinDetailedScreen = () => {
                 usd,
             }
         }
-    } = coin || {};
+        // @FIXME - correct the data type
+        // coin
+    } = cryptoCurrencyData || {};
 
-    const { prices } = coinMarketData;
+    // @FIXME - correct the data type
+    const { prices } = cryptoCurrencyData; // coinMarketData;
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
 
     const formatCurrency = (value) => {
