@@ -139,7 +139,7 @@ const CoinDetailedScreen = () => {
     // prices.map(([timestamp, value]) => ({ timestamp, value }))
     return (
         <View className="pt-12">
-            <LineChart.Provider data={[]}>
+            <LineChart.Provider data={prices.map(([timestamp, value]) => ({ timestamp, value }))}>
 
             <CoinDetailedHeader
                     coinId={id}
@@ -182,8 +182,9 @@ const CoinDetailedScreen = () => {
                     </View>
                 </View>
 
-                <LineChart>
-                    <LineChart.Path />
+                <LineChart height={screenWidth / 2} width={screenWidth}>
+                    <LineChart.Path color={chartColor} />
+                    <LineChart.CursorCrosshair color={chartColor} />
                 </LineChart>
 
                 <View className="bg-gray-800 py-4 mx-4 rounded-lg">
