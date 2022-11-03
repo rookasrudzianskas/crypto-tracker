@@ -220,10 +220,64 @@ const CoinDetailedScreen = () => {
                     </View>
                 </View>
 
-                <LineChart height={screenWidth / 2} width={screenWidth}>
-                    <LineChart.Path color={chartColor} />
-                    <LineChart.CursorCrosshair color={chartColor} />
-                </LineChart>
+                {isCandleChartVisible ? (
+                    <CandlestickChart.Provider
+                        data={coinCandleChartData.map(
+                            ([timestamp, open, high, low, close]) => ({
+                                timestamp,
+                                open,
+                                high,
+                                low,
+                                close,
+                            })
+                        )}
+                    >
+                        <CandlestickChart height={screenWidth / 2} width={screenWidth}>
+                            <CandlestickChart.Candles />
+                            <CandlestickChart.Crosshair>
+                                <CandlestickChart.Tooltip />
+                            </CandlestickChart.Crosshair>
+                        </CandlestickChart>
+                        <View style={styles.candleStickDataContainer}>
+                            <View>
+                                <Text style={styles.candleStickTextLabel}>Open</Text>
+                                <CandlestickChart.PriceText
+                                    style={styles.candleStickText}
+                                    type="open"
+                                />
+                            </View>
+                            <View>
+                                <Text style={styles.candleStickTextLabel}>High</Text>
+                                <CandlestickChart.PriceText
+                                    style={styles.candleStickText}
+                                    type="high"
+                                />
+                            </View>
+                            <View>
+                                <Text style={styles.candleStickTextLabel}>Low</Text>
+                                <CandlestickChart.PriceText
+                                    style={styles.candleStickText}
+                                    type="low"
+                                />
+                            </View>
+                            <View>
+                                <Text style={styles.candleStickTextLabel}>Close</Text>
+                                <CandlestickChart.PriceText
+                                    style={styles.candleStickText}
+                                    type="close"
+                                />
+                            </View>
+                        </View>
+                        <CandlestickChart.DatetimeText
+                            style={{ color: "white", fontWeight: "700", margin: 10 }}
+                        />
+                    </CandlestickChart.Provider>
+                ) : (
+                    <LineChart height={screenWidth / 2} width={screenWidth}>
+                        <LineChart.Path color={chartColor} />
+                        <LineChart.CursorCrosshair color={chartColor} />
+                    </LineChart>
+                )}
 
                 <View className="bg-gray-800 py-4 mx-4 rounded-lg">
                     <View className="flex-row items-center justify-around">
