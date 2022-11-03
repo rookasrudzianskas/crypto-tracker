@@ -100,10 +100,10 @@ const CoinDetailedScreen = () => {
         }
         // @FIXME - correct the data type
         // coin cryptoCurrencyData
-    } = cryptoCurrencyData || {};
+    } = coin || {};
 
     // @FIXME - correct the data type
-    const { prices } = cryptoCurrencyData; // coinMarketData; cryptoCurrencyData
+    const { prices } = coinMarketData; // coinMarketData; cryptoCurrencyData
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
 
     const formatCurrency = ({ value }) => {
@@ -132,25 +132,6 @@ const CoinDetailedScreen = () => {
         const floatValue = parseFloat(value.replace(',', '.')) || 0;
         setCoinValue((floatValue / usd).toString())
     }
-
-    const data = [
-        {
-            timestamp: 1625945400000,
-            value: 33575.25,
-        },
-        {
-            timestamp: 1625946300000,
-            value: 33545.25,
-        },
-        {
-            timestamp: 1625947200000,
-            value: 33510.25,
-        },
-        {
-            timestamp: 1625948100000,
-            value: 33215.25,
-        },
-    ];
 
     return (
         <View className="pt-12">
