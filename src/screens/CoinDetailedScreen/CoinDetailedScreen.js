@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image, TextInput, ActivityIndicator} from 'react-native';
 import cryptoCurrencyData from "../../../assets/data/crypto.json";
-import {FontAwesome, Ionicons} from "@expo/vector-icons";
+import {FontAwesome, Ionicons, MaterialIcons} from "@expo/vector-icons";
 import CoinDetailedHeader from "./components/CoinDetailedHeader";
 import CoinDetailFooter from "./components/CoinDetailFooter";
 import {Dimensions} from 'react-native';
@@ -20,6 +20,10 @@ const CoinDetailedScreen = () => {
 
     const screenWidth = Dimensions.get('window').width;
     const [loading, setLoading] = useState(false);
+
+    const [coinCandleChartData, setCoinCandleChartData] = useState(null);
+    const [isCandleChartVisible, setIsCandleChartVisible] = useState(false);
+
     const [coinValue, setCoinValue] = useState('1');
     const [usdValue, setUsdValue] = useState("0.00");
     const [selectedRange, setSelectedRange] = useState("1");
@@ -184,6 +188,25 @@ const CoinDetailedScreen = () => {
                                     key={day.filterText}
                                 />
                             ))}
+                        {isCandleChartVisible ? (
+                            <TouchableOpacity className="mt-1 -ml-10" activeOpacity={0.7}>
+                                <MaterialIcons
+                                    name="show-chart"
+                                    size={24}
+                                    color="#16c784"
+                                    onPress={() => setIsCandleChartVisible(false)}
+                                />
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity className="mt-1 -ml-10" activeOpacity={0.7}>
+                                <MaterialIcons
+                                    name="waterfall-chart"
+                                    size={24}
+                                    color="#16c784"
+                                    onPress={() => setIsCandleChartVisible(true)}
+                                />
+                            </TouchableOpacity>
+                        )}
                     </View>
                 </View>
 
