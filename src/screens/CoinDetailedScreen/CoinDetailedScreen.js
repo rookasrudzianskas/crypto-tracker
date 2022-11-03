@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image, TextInput, ActivityIndicator} from 'react-native';
 import cryptoCurrencyData from "../../../assets/data/crypto.json";
 import {FontAwesome, Ionicons, MaterialIcons} from "@expo/vector-icons";
@@ -10,7 +10,7 @@ import {ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from '@rainbow-me/a
 import 'react-native-gesture-handler';
 import CoinSelectedFeatures from "./components/CoinSelectedFeatures";
 import {useRoute} from "@react-navigation/native";
-import {getCoinMarketChart, getDetailedCoinData} from "../../services/requests";
+import {getCandleChartData, getCoinMarketChart, getDetailedCoinData} from "../../services/requests";
 import FilterComponent from "./components/FilterComponent";
 import { LineChart, CandlestickChart } from "react-native-wagmi-charts";
 
@@ -57,12 +57,29 @@ const CoinDetailedScreen = () => {
         setCoinMarketData(fetchedCoinMarketData);
     };
 
-    // useEffect(() => {
-    //     fetchCoinData();
-    //     fetchMarketCoinData(1);
-    // }, []);
-    //
-    // if(loading || !coin || !coinMarketData) {
+    const fetchCandleStickChartData = async (selectedRangeValue) => {
+        const fetchedSelectedCandleChartData = await getCandleChartData(
+            coinId,
+            selectedRangeValue
+        );
+        setCoinCandleChartData(fetchedSelectedCandleChartData);
+    };
+
+    useEffect(() => {
+        fetchCoinData();
+        fetchMarketCoinData(1);
+        fetchCandleStickChartData();
+    }, []);
+
+    const onSelectedRangeChange = (selectedRangeValue) => {
+        setSelectedRange(selectedRangeValue);
+        fetchMarketCoinData(selectedRangeValue);
+        fetchCandleStickChartData(selectedRangeValue);
+    };
+
+    const memoOnSelectedRangeChange = useCallback((range) => onSelectedRangeChange(range), []);
+
+    // if(loading || !coin || !coinMarketData || !coinCandleChartData) {
     //     return (
     //         <View className="h-screen justify-center items-center">
     //             <ActivityIndicator />
@@ -115,11 +132,6 @@ const CoinDetailedScreen = () => {
         const floatValue = parseFloat(value.replace(',', '.')) || 0;
         setCoinValue((floatValue / usd).toString())
     }
-
-    const onSelectedRangeChange = (selectedRangeValue) => {
-        setSelectedRange(selectedRangeValue);
-        fetchMarketCoinData(selectedRangeValue);
-    };
 
     const data = [
         {
