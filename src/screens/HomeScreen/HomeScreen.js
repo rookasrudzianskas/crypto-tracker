@@ -31,10 +31,11 @@ const HomeScreen = () => {
     return (
         <View className=" pt-16">
             <View>
-                <View className="mx-4">
+                <View className="mx-4 flex-row justify-between items-center">
                     <Text
                         // style={{ fontFamily: 'Inter_900Black' }}
                         className="text-3xl font-bold text-white tracking-wider mb-2">Crypto assets</Text>
+                    <Text className="text-xs text-white font-bold">Powered by CoinGecko</Text>
                 </View>
             </View>
             <View>
