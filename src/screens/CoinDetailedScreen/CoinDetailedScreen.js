@@ -157,8 +157,6 @@ const CoinDetailedScreen = () => {
                 />
 
                 <View className="flex-row items-center justify-between mx-4">
-                    {/*<ChartYLabel format={formatCurrency} style={styles.currentPrice} />*/}
-                    {/*<Text style={styles.currentPrice}>20222.00</Text>*/}
                     <LineChart.PriceText
                         format={formatCurrency}
                         style={styles.currentPrice}
