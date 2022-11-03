@@ -46,3 +46,12 @@ export const getAllCoins = async () => {
 }
 // Path: src/screens/CoinDetailedScreen/CoinDetailedScreen.js
 // https://api.coingecko.com/api/v3/coins/tether?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false
+
+export const getCandleChartData = async (coinId, days = 1) => {
+    try {
+        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=usd&days=${days}`)
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+}
