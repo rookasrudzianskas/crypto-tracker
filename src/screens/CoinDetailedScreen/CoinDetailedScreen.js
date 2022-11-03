@@ -79,13 +79,13 @@ const CoinDetailedScreen = () => {
 
     const memoOnSelectedRangeChange = useCallback((range) => onSelectedRangeChange(range), []);
 
-    // if(loading || !coin || !coinMarketData || !coinCandleChartData) {
-    //     return (
-    //         <View className="h-screen justify-center items-center">
-    //             <ActivityIndicator />
-    //         </View>
-    //     );
-    // }
+    if(loading || !coin || !coinMarketData || !coinCandleChartData) {
+        return (
+            <View className="h-screen justify-center items-center">
+                <ActivityIndicator />
+            </View>
+        );
+    }
 
     const {image: { small },
         id,
