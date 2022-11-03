@@ -1,6 +1,14 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+    Text,
+    View,
+    StyleSheet,
+    TextInput,
+    TouchableOpacity,
+    ActivityIndicator,
+    KeyboardAvoidingView, Platform
+} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import {useRecoilState} from "recoil";
@@ -81,49 +89,51 @@ const AddNewAssetScreen = () => {
     }
 
     return (
-        <View className="mx-4">
-            <SearchableDropdown
-                items={allCoins}
-                onItemSelect={(item) => setSelectedCoinId(item.id)}
-                containerStyle={styles.dropdownContainer}
-                itemStyle={styles.item}
-                itemTextStyle={{ color: "white" }}
-                resetValue={false}
-                placeholder={selectedCoinId || "Select a coin..."}
-                placeholderTextColor="white"
-                textInputProps={{
-                    underlineColorAndroid: "transparent",
-                    style: {
-                        padding: 12,
-                        borderWidth: 1.5,
-                        borderColor: "#444444",
-                        borderRadius: 5,
-                        backgroundColor: "#1e1e1e",
-                        color: "white",
-                    },
-                }}
-            />
-            <View className="h-[90%] items-center">
-                {selectedCoinId && (
-                    <View className="mt-16">
-                        <View className="flex-row items-center justify-center">
-                            <TextInput value={boughtAssetQuantity} onChangeText={setBoughtAssetQuantity}
-                                       keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
-                            <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">{selectedCoin?.symbol || 'Loading...'}</Text>
+        <KeyboardAvoidingView style={{ flex: 1 }} keyboardVerticalOffset={80} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <View className="mx-4">
+                <SearchableDropdown
+                    items={allCoins}
+                    onItemSelect={(item) => setSelectedCoinId(item.id)}
+                    containerStyle={styles.dropdownContainer}
+                    itemStyle={styles.item}
+                    itemTextStyle={{ color: "white" }}
+                    resetValue={false}
+                    placeholder={selectedCoinId || "Select a coin..."}
+                    placeholderTextColor="white"
+                    textInputProps={{
+                        underlineColorAndroid: "transparent",
+                        style: {
+                            padding: 12,
+                            borderWidth: 1.5,
+                            borderColor: "#444444",
+                            borderRadius: 5,
+                            backgroundColor: "#1e1e1e",
+                            color: "white",
+                        },
+                    }}
+                />
+                <View className="h-[90%] items-center">
+                    {selectedCoinId && (
+                        <View className="mt-16">
+                            <View className="flex-row items-center justify-center">
+                                <TextInput value={boughtAssetQuantity} onChangeText={setBoughtAssetQuantity}
+                                           keyboardType={'numeric'} className="text-gray-800 text-[90px]" placeholder={'0'}/>
+                                <Text className="text-gray-400 font-bold uppercase tracking-wider -mt-12 ml-3 text-[17px]">{selectedCoin?.symbol || 'Loading...'}</Text>
+                            </View>
+                            <View className="items-center justify-center mt-2">
+                                <Text className="text-gray-500 font-bold tracking-wider">${selectedCoin?.market_data?.current_price?.usd || 'Loading...'} per coin</Text>
+                            </View>
                         </View>
-                        <View className="items-center justify-center mt-2">
-                            <Text className="text-gray-500 font-bold tracking-wider">${selectedCoin?.market_data?.current_price?.usd || 'Loading...'} per coin</Text>
-                        </View>
-                    </View>
-                )}
-                <TouchableOpacity activeOpacity={0.7} className={`absolute bottom-6 w-full mx-4 flex-row items-center justify-center py-3 ${isQuantityEntered() ? 'bg-blue-600' : 'bg-gray-600'} rounded-md`}
-                                  disabled={!isQuantityEntered()}
-                                  onPress={onAddNewAsset}
-                >
-                    <Text className={`text-white font-bold`}>Add New Asset</Text>
-                </TouchableOpacity>
+                    )}
+                    <TouchableOpacity activeOpacity={0.7} className={`absolute bottom-6 w-full mx-4 flex-row items-center justify-center py-3 ${isQuantityEntered() ? 'bg-blue-600' : 'bg-gray-600'} rounded-md`}
+                                      disabled={!isQuantityEntered()}
+                                      onPress={onAddNewAsset}
+                    >
+                        <Text className={`text-white font-bold`}>Add New Asset</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 
