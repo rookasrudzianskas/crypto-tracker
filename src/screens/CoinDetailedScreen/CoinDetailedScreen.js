@@ -38,6 +38,8 @@ const CoinDetailedScreen = () => {
         setLoading(true);
         const fetchedCoinData = await getDetailedCoinData(coinId);
         const fetchedCoinMarketData = await getCoinMarketChart(coinId);
+        // console.log(fetchedCoinMarketData);
+        // console.log('COIN >>>>', fetchedCoinData);
         setCoin(fetchedCoinData);
         setCoinMarketData(fetchedCoinMarketData);
         setUsdValue(fetchedCoinData?.market_data?.current_price?.usd.toString());
@@ -57,7 +59,13 @@ const CoinDetailedScreen = () => {
         fetchMarketCoinData(1);
     }, []);
 
-    if(loading || !coin || !coinMarketData) {
+    if(
+        loading ||
+        // !coin ||
+        !coinMarketData) {
+        // console.log("Loading...", loading);
+        // console.log("Coin", coin);
+        // console.log("CoinMarketData", coinMarketData);
         return (
             <View className="h-screen justify-center items-center">
                 <ActivityIndicator />

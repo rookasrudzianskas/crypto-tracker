@@ -45,3 +45,4 @@ export const getAllCoins = async () => {
     }
 }
 // Path: src/screens/CoinDetailedScreen/CoinDetailedScreen.js
+// https://api.coingecko.com/api/v3/coins/tether?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false
