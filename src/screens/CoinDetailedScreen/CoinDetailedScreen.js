@@ -99,11 +99,11 @@ const CoinDetailedScreen = () => {
             }
         }
         // @FIXME - correct the data type
-        // coin
+        // coin cryptoCurrencyData
     } = cryptoCurrencyData || {};
 
     // @FIXME - correct the data type
-    const { prices } = cryptoCurrencyData; // coinMarketData;
+    const { prices } = cryptoCurrencyData; // coinMarketData; cryptoCurrencyData
     const chartColor = usd > prices[0][1] ? '#16c784' : '#Ea3943';
 
     const formatCurrency = ({ value }) => {
